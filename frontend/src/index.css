@@ -26,9 +26,9 @@ code {
 }
 
 .side-menu {
-  width: 260px;
+  width: 25%;
   background-color: #202123;
-  padding: 10px;
+  padding: 4px;
 }
 
 .chat-box {
@@ -39,4 +39,11 @@ code {
 
 .chat-log {
   text-align: left;
+}
+
+@media (min-width: 1024px) {
+  .side-menu {
+    width: 260px;
+    padding: 10px;
+  }
 }

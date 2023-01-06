@@ -1,5 +1,5 @@
 .chat-input-box {
-  padding: 24px;
+  padding: 18px;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -9,11 +9,22 @@
 .chat-input-textarea {
   color: white;
   background-color: #40414f;
-  width: 50%;
+  width: 80%;
   border-radius: 5px;
   border: none;
   outline: none;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.25);
   padding: 12px;
-  font-size: 1.25em;
+  font-size: 0.9em;
+}
+
+@media (min-width: 1024px) {
+  .chat-input-box {
+    padding: 24px;
+  }
+
+  .chat-input-textarea {
+    width: 50%;
+    font-size: 1.25em;
+  }
 }

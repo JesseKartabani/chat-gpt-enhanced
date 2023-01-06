@@ -1,17 +1,34 @@
 .new-chat-button {
-  padding: 12px;
+  padding: 6px;
   border: 1px solid #474749;
   border-radius: 5px;
-  text-align: left;
+  text-align: center;
 }
 
 .new-chat-button span {
-  padding-left: 6px;
-  padding-right: 12px;
+  padding-left: 2px;
+  padding-right: 4px;
   font-size: larger;
+  display: none;
 }
 
 .new-chat-button:hover {
   background-color: rgba(107, 114, 128, 0.1);
   transition: ease 0.25s all;
+}
+
+@media (min-width: 1024px) {
+  .new-chat-button span {
+    padding-left: 6px;
+    padding-right: 12px;
+  }
+
+  .new-chat-button span {
+    display: inline;
+  }
+
+  .new-chat-button {
+    padding: 12px;
+    text-align: left;
+  }
 }

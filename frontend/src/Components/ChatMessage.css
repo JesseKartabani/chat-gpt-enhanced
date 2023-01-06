@@ -7,23 +7,53 @@
   margin-left: auto;
   margin-right: auto;
   display: flex;
-  padding: 12px;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding: 8px;
 }
 
 .message {
-  padding-left: 40px;
-  padding-right: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  align-items: center;
 }
 
 .avatar {
   background: white;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  min-width: 20px;
+  min-height: 20px;
+  max-width: 20px;
+  max-height: 20px;
 }
 
 .avatar.chatgpt {
   background-color: #0da37f;
+}
+
+.svg {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .avatar {
+    min-width: 41px;
+    min-height: 41px;
+    max-width: 41px;
+    max-height: 41px;
+  }
+
+  .message {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .chat-message-center {
+    padding: 12px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .svg {
+    display: inline;
+  }
 }
