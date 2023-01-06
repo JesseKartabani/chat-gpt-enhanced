@@ -37,56 +37,6 @@ code {
   position: relative;
 }
 
-.chat-input-box {
-  padding: 24px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-.chat-input-textarea {
-  color: white;
-  background-color: #40414f;
-  width: 50%;
-  border-radius: 5px;
-  border: none;
-  outline: none;
-  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.25);
-  padding: 12px;
-  font-size: 1.25em;
-}
-
 .chat-log {
   text-align: left;
-}
-
-.chat-message.chatgpt {
-  background-color: #444654;
-}
-
-.chat-message-center {
-  max-width: 640px;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  padding: 12px;
-  padding-left: 24px;
-  padding-right: 24px;
-}
-
-.message {
-  padding-left: 40px;
-  padding-right: 40px;
-}
-
-.avatar {
-  background: white;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-}
-
-.avatar.chatgpt {
-  background-color: #0da37f;
 }

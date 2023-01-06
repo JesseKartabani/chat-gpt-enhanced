@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ChatInputForm from "./Components/ChatInputForm";
 import ChatMessage from "./Components/ChatMessage";
 import NewChatButton from "./Components/NewChatButton";
 
@@ -54,15 +55,11 @@ function App() {
           ))}
         </div>
 
-        <div className="chat-input-box">
-          <form onSubmit={handleSubmit}>
-            <input
-              className="chat-input-textarea"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-            ></input>
-          </form>
-        </div>
+        <ChatInputForm
+          input={input}
+          setInput={setInput}
+          handleSubmit={handleSubmit}
+        />
       </section>
     </div>
   );
