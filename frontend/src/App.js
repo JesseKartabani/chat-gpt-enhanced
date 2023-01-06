@@ -14,16 +14,36 @@ function App() {
     },
   ]);
 
+  function clearChat() {
+    setChatLog([]);
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
-    setChatLog([...chatLog, { user: "me", message: `${input}` }]);
+    let chatLogNew = [...chatLog, { user: "me", message: `${input}` }];
     setInput("");
+    setChatLog(chatLogNew);
+
+    const messages = chatLogNew.map((message) => message.message).join("\n");
+
+    const response = await fetch("http://localhost:3080", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message: messages,
+      }),
+    });
+
+    const data = await response.json();
+    setChatLog([...chatLogNew, { user: "gpt", message: `${data.message}` }]);
   }
 
   return (
     <div className="App">
       <aside className="side-menu">
-        <div className="new-chat-button">
+        <div className="new-chat-button" onClick={clearChat}>
           <span>+</span>New Chat
         </div>
       </aside>
