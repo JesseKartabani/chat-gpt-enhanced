@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ChatMessage from "./Components/ChatMessage";
+import NewChatButton from "./Components/NewChatButton";
 
 function App() {
   const [input, setInput] = useState("");
@@ -43,9 +44,7 @@ function App() {
   return (
     <div className="App">
       <aside className="side-menu">
-        <div className="new-chat-button" onClick={clearChat}>
-          <span>+</span>New Chat
-        </div>
+        <NewChatButton clearChat={clearChat} />
       </aside>
 
       <section className="chat-box">
