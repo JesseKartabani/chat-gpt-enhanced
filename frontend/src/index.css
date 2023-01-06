@@ -1,13 +1,110 @@
+.App {
+  text-align: center;
+  display: flex;
+  background-color: #282c34;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
 body {
+  color: white;
+
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.side-menu {
+  width: 260px;
+  background-color: #202123;
+  padding: 10px;
+}
+
+.chat-box {
+  flex: 1;
+  background-color: #343541;
+  position: relative;
+}
+
+.new-chat-button {
+  padding: 12px;
+  border: 1px solid #474749;
+  border-radius: 5px;
+  text-align: left;
+}
+
+.new-chat-button span {
+  padding-left: 6px;
+  padding-right: 12px;
+  font-size: larger;
+}
+
+.new-chat-button:hover {
+  background-color: rgba(107, 114, 128, 0.1);
+  transition: ease 0.25s all;
+}
+
+.chat-input-box {
+  padding: 24px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.chat-input-textarea {
+  color: white;
+  background-color: #40414f;
+  width: 50%;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.25);
+  padding: 12px;
+  font-size: 1.25em;
+}
+
+.chat-log {
+  text-align: left;
+}
+
+.chat-message.chatgpt {
+  background-color: #444654;
+}
+
+.chat-message-center {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  padding: 12px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.message {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.avatar {
+  background: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.avatar.chatgpt {
+  background-color: #0da37f;
 }
