@@ -2,6 +2,9 @@
   background-color: #444654;
 }
 
+.chat-message {
+}
+
 .chat-message-center {
   max-width: 640px;
   margin-left: auto;
@@ -18,6 +21,8 @@
 }
 
 .avatar {
+  margin-top: 10px;
+  margin-bottom: 10px;
   background: white;
   border-radius: 50%;
   min-width: 20px;
