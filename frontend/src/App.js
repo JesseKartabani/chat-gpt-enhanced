@@ -5,16 +5,7 @@ import NewChatButton from "./Components/NewChatButton";
 
 function App() {
   const [input, setInput] = useState("");
-  const [chatLog, setChatLog] = useState([
-    {
-      user: "gpt",
-      message: "How can I help you today?",
-    },
-    {
-      user: "me",
-      message: "I want to use chat GPT today",
-    },
-  ]);
+  const [chatLog, setChatLog] = useState([]);
 
   function clearChat() {
     setChatLog([]);
