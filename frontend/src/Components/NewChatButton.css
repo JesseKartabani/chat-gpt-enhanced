@@ -3,6 +3,8 @@
   border: 1px solid #474749;
   border-radius: 5px;
   text-align: center;
+  position: sticky;
+  top: 0px;
 }
 
 .new-chat-button span {
