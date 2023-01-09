@@ -1,8 +1,12 @@
 .chat-input-box {
-  margin: 70px;
+  margin: 110px;
 }
 
 .chat-input-textarea {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  resize: none;
   color: white;
   background-color: #40414f;
   width: 80%;
@@ -25,8 +29,8 @@
   color: gray;
   background-color: #40414f;
   position: absolute;
-  bottom: 25px;
-  left: 89%;
+  bottom: 35px;
+  left: 83%;
   transform: translateX(-50%);
   transform: rotate(90deg);
 }
@@ -51,8 +55,8 @@
   }
 
   .submit-button {
-    bottom: 78px;
-    left: 75%;
+    bottom: 91px;
+    left: 74%;
   }
 
   .submit-svg {

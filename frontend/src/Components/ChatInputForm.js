@@ -5,12 +5,12 @@ const ChatInputForm = ({ input, setInput, handleSubmit }) => {
   return (
     <div className="chat-input-box">
       <form onSubmit={handleSubmit}>
-        <input
+        <textarea
           className="chat-input-textarea"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Prompt"
-        ></input>
+        ></textarea>
         <button className="submit-button">
           <svg
             stroke="currentColor"

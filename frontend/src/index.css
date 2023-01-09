@@ -50,3 +50,19 @@ code {
     padding: 10px;
   }
 }
+
+::-webkit-scrollbar {
+  background-color: #343541;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #565869;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.7);
+  background-clip: content-box;
+}
