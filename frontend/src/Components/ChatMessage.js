@@ -1,9 +1,16 @@
 import React from "react";
 import "./ChatMessage.css";
+import { motion } from "framer-motion";
 
 const ChatMessage = ({ message }) => {
   return (
-    <div className={`chat-message ${message.user === "gpt" && "chatgpt"}`}>
+    <motion.div
+      // fade messages in
+      initial={{ opacity: 0.5 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className={`chat-message ${message.user === "gpt" && "chatgpt"}`}
+    >
       <div className="chat-message-center">
         <div className={`avatar ${message.user === "gpt" && "chatgpt"}`}>
           {message.user === "gpt" && (
@@ -24,7 +31,7 @@ const ChatMessage = ({ message }) => {
         </div>
         <div className="message">{message.message}</div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
