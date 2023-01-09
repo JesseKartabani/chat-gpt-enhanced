@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./ChatMessage.css";
 import { motion } from "framer-motion";
 
 const ChatMessage = ({ message }) => {
+  // Scrolls to bottom of the page when getting a new message
+  useEffect(() => {
+    window.scrollTo(0, document.body.scrollHeight);
+  }, []);
   return (
     <motion.div
       // fade messages in
