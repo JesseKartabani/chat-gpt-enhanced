@@ -20,7 +20,8 @@
 }
 
 .submit-button {
-  border: none;
+  border: 1px solid #40414f;
+  border-radius: 10px;
   color: gray;
   background-color: #40414f;
   position: absolute;
@@ -28,6 +29,12 @@
   left: 89%;
   transform: translateX(-50%);
   transform: rotate(90deg);
+}
+
+.submit-button:hover {
+  background-color: #202123;
+  border: 1px solid gray;
+  transition: all 0.2s ease-in;
 }
 
 @media (min-width: 1024px) {
