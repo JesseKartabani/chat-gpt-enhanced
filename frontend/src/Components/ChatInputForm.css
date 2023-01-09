@@ -1,5 +1,5 @@
 .chat-input-box {
-  margin: 20px;
+  margin: 70px;
 }
 
 .chat-input-textarea {
@@ -13,7 +13,7 @@
   padding: 12px;
   font-size: 0.9em;
   position: absolute;
-  bottom: 20px;
+  bottom: 15px;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -26,5 +26,6 @@
   .chat-input-textarea {
     width: 50%;
     font-size: 1.25em;
+    bottom: 70px;
   }
 }
