@@ -5,6 +5,9 @@
   text-align: center;
   position: sticky;
   top: 6px;
+  background: linear-gradient(265.27deg, #0000 20.55%, #202123 94.17%);
+  background-color: #202123;
+  transition: all 0.2s ease-in;
 }
 
 .new-chat-button span {
@@ -16,7 +19,6 @@
 
 .new-chat-button:hover {
   background-color: rgba(107, 114, 128, 0.1);
-  transition: ease 0.25s all;
 }
 
 @media (min-width: 1024px) {
