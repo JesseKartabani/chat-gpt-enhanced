@@ -16,6 +16,18 @@
   bottom: 15px;
   left: 50%;
   transform: translateX(-50%);
+  padding-right: 35px;
+}
+
+.submit-button {
+  border: none;
+  color: gray;
+  background-color: #40414f;
+  position: absolute;
+  bottom: 25px;
+  left: 89%;
+  transform: translateX(-50%);
+  transform: rotate(90deg);
 }
 
 @media (min-width: 1024px) {
@@ -28,5 +40,16 @@
     font-size: 1.25em;
     bottom: 62px;
     padding: 18px;
+    padding-right: 60px;
+  }
+
+  .submit-button {
+    bottom: 78px;
+    left: 75%;
+  }
+
+  .submit-svg {
+    width: 20px;
+    height: 20px;
   }
 }
