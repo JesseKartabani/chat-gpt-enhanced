@@ -4,7 +4,7 @@
   border-radius: 5px;
   text-align: center;
   position: sticky;
-  top: 0px;
+  top: 6px;
 }
 
 .new-chat-button span {
@@ -32,5 +32,6 @@
   .new-chat-button {
     padding: 12px;
     text-align: left;
+    top: 12px;
   }
 }
