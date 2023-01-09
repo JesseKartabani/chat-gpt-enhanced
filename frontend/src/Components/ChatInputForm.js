@@ -1,7 +1,7 @@
 import "./ChatInputForm.css";
 import React from "react";
 
-const ChatInputForm = ({ input, setInput, handleSubmit }) => {
+const ChatInputForm = ({ input, setInput, handleSubmit, isLoading }) => {
   return (
     <div className="chat-input-box">
       <form onSubmit={handleSubmit}>
@@ -11,7 +11,7 @@ const ChatInputForm = ({ input, setInput, handleSubmit }) => {
           onChange={(e) => setInput(e.target.value)}
           placeholder="Prompt"
         ></textarea>
-        <button className="submit-button">
+        <button className="submit-button" disabled={isLoading}>
           <svg
             stroke="currentColor"
             fill="currentColor"

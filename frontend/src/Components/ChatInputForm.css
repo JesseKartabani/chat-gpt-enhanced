@@ -41,6 +41,13 @@
   transition: all 0.2s ease-in;
 }
 
+.submit-button:disabled {
+  background-color: #40414f;
+  border: 1px solid #40414f;
+  transition: all 0.2s ease-in-out;
+  opacity: 0.1;
+}
+
 @media (min-width: 1024px) {
   .chat-input-box {
     padding: 24px;

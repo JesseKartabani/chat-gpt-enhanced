@@ -57,6 +57,7 @@ function App() {
           input={input}
           setInput={setInput}
           handleSubmit={handleSubmit}
+          isLoading={isLoading}
         />
       </section>
     </div>
