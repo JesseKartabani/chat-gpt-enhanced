@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import "./ChatMessage.css";
 import { motion } from "framer-motion";
 
 const ChatMessage = ({ message }) => {
   // Scrolls to bottom of the page when getting a new message
+  const newContentRef = useRef(null);
+
   useEffect(() => {
-    window.scrollTo(0, document.body.scrollHeight);
+    newContentRef.current.scrollIntoView({ behavior: "smooth" });
   }, []);
   return (
     <motion.div
@@ -39,7 +41,9 @@ const ChatMessage = ({ message }) => {
         </div>
 
         {/* Messages */}
-        <div className="message">{message.message}</div>
+        <div ref={newContentRef} className="message">
+          {message.message}
+        </div>
       </div>
     </motion.div>
   );
