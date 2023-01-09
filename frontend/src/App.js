@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { CircularProgress } from "@mui/material";
 import ChatInputForm from "./Components/ChatInputForm";
 import ChatMessage from "./Components/ChatMessage";
 import NewChatButton from "./Components/NewChatButton";
@@ -6,6 +7,7 @@ import NewChatButton from "./Components/NewChatButton";
 function App() {
   const [input, setInput] = useState("");
   const [chatLog, setChatLog] = useState([]);
+  const [isLoading, setIsLoading] = useState(null);
 
   function clearChat() {
     setChatLog([]);
@@ -16,6 +18,7 @@ function App() {
     let chatLogNew = [...chatLog, { user: "me", message: `${input}` }];
     setInput("");
     setChatLog(chatLogNew);
+    setIsLoading(true);
 
     const messages = chatLogNew.map((message) => message.message).join("\n");
 
@@ -31,6 +34,7 @@ function App() {
 
     const data = await response.json();
     setChatLog([...chatLogNew, { user: "gpt", message: `${data.message}` }]);
+    setIsLoading(false);
   }
 
   return (
@@ -44,6 +48,9 @@ function App() {
           {chatLog.map((message, index) => (
             <ChatMessage key={index} message={message} />
           ))}
+          {isLoading === true && (
+            <CircularProgress className="circular-progress" />
+          )}
         </div>
 
         <ChatInputForm
