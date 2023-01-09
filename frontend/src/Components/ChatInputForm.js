@@ -10,6 +10,7 @@ const ChatInputForm = ({ input, setInput, handleSubmit, isLoading }) => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Prompt"
+          required={true}
         ></textarea>
         <button className="submit-button" disabled={isLoading}>
           <svg
