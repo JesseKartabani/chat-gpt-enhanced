@@ -29,6 +29,7 @@ code {
 .chat-box {
   flex: 1;
   position: relative;
+  background: linear-gradient(to top, #353740, #444654);
 }
 
 .chat-log {
