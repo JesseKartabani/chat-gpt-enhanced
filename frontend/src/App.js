@@ -3,6 +3,7 @@ import { CircularProgress } from "@mui/material";
 import ChatInputForm from "./Components/ChatInputForm";
 import ChatMessage from "./Components/ChatMessage";
 import NewChatButton from "./Components/NewChatButton";
+import Hero from "./Components/Hero";
 
 function App() {
   const [input, setInput] = useState("");
@@ -44,6 +45,8 @@ function App() {
       </aside>
 
       <section className="chat-box">
+        {chatLog.length === 0 && <Hero />}
+
         <div className="chat-log">
           {chatLog.map((message, index) => (
             <ChatMessage key={index} message={message} />
