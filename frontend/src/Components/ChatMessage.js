@@ -41,7 +41,7 @@ const ChatMessage = ({ message }) => {
         </div>
 
         {/* Messages */}
-        <div ref={newContentRef} className="message">
+        <div ref={newContentRef} className="message" data-testid="message-text">
           {message.message}
         </div>
       </div>
