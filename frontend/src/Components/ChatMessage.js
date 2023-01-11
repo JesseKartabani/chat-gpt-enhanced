@@ -8,6 +8,7 @@ const ChatMessage = ({ message }) => {
 
   const [text] = useTypewriter({
     words: [message.message],
+    typeSpeed: 15,
   });
 
   useEffect(() => {
