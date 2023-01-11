@@ -37,6 +37,7 @@ const ChatInputForm = ({ input, setInput, handleSubmit, isLoading }) => {
           isListening === false && "not-listening"
         }`}
         onClick={handleToggleListening}
+        aria-label="toggle microphone"
       >
         <svg
           stroke="currentColor"
@@ -68,6 +69,7 @@ const ChatInputForm = ({ input, setInput, handleSubmit, isLoading }) => {
           data-testid="submit-button"
           className="submit-button"
           disabled={isLoading}
+          aria-label="submit"
         >
           <svg
             stroke="currentColor"
