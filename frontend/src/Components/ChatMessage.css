@@ -17,6 +17,7 @@
 }
 
 .message {
+  position: relative;
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -37,6 +38,27 @@
 
 .svg {
   display: none;
+}
+
+.copy-text-button {
+  position: absolute;
+  display: none;
+  top: 0;
+  background-color: #444654;
+  color: white;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 5px;
+  transition: all 0.2s ease-in-out;
+}
+
+.copy-text-button:hover {
+  background-color: #202123;
+  border: 1px solid gray;
+}
+
+.copy-text-button:active {
+  opacity: 0.1;
 }
 
 @media (min-width: 1024px) {
@@ -60,5 +82,12 @@
 
   .svg {
     display: inline;
+  }
+
+  .copy-text-button {
+    right: -150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

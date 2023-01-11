@@ -3,9 +3,10 @@ import "./ChatMessage.css";
 import { motion } from "framer-motion";
 import { Cursor, useTypewriter } from "react-simple-typewriter";
 
-const ChatMessage = ({ message }) => {
+const ChatMessage = ({ message, isLastMessage }) => {
   const messagesEndRef = useRef(null);
   const [cursorVisible, setCursorVisible] = useState("|");
+  const [buttonText, setButtonText] = useState("Copy");
 
   const [text] = useTypewriter({
     words: [message.message],
@@ -30,6 +31,17 @@ const ChatMessage = ({ message }) => {
   useEffect(() => {
     scrollToBottom();
   }, [text]);
+
+  function copyText() {
+    navigator.clipboard.writeText(messagesEndRef.current.textContent).then(
+      () => {
+        setButtonText("Copied");
+      },
+      (err) => {
+        console.error("Failed to copy text: ", err);
+      }
+    );
+  }
 
   return (
     <motion.div
@@ -72,6 +84,26 @@ const ChatMessage = ({ message }) => {
           <div ref={messagesEndRef} className="message">
             {text}
             <Cursor cursorColor="white" cursorStyle={cursorVisible} />
+            {isLastMessage ? (
+              <button className="copy-text-button" onClick={copyText}>
+                <svg
+                  stroke="currentColor"
+                  fill="none"
+                  strokeWidth={2}
+                  viewBox="0 0 24 24"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-4 w-4"
+                  height="1.5em"
+                  width="1.5em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                  <rect x={8} y={2} width={8} height={4} rx={1} ry={1} />
+                </svg>
+                &nbsp; {buttonText}
+              </button>
+            ) : null}
           </div>
         )}
       </div>

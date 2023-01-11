@@ -53,7 +53,11 @@ function App() {
 
         <div className="chat-log">
           {chatLog.map((message, index) => (
-            <ChatMessage key={index} message={message} />
+            <ChatMessage
+              key={index}
+              message={message}
+              isLastMessage={index === chatLog.length - 1}
+            />
           ))}
           {isLoading === true && (
             <CircularProgress className="circular-progress" />
