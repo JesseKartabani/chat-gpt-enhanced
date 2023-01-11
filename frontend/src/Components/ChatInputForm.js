@@ -1,7 +1,29 @@
 import "./ChatInputForm.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
 
 const ChatInputForm = ({ input, setInput, handleSubmit, isLoading }) => {
+  const { transcript, resetTranscript } = useSpeechRecognition();
+  const [lastTranscript, setLastTranscript] = useState(transcript);
+
+  useEffect(() => {
+    SpeechRecognition.startListening({ continuous: true });
+    console.log("listening");
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      //Clean up the transcript
+      const cleanedTranscript = transcript.trim().replace(/\s+/g, " ");
+      if (cleanedTranscript !== lastTranscript) {
+        setInput(input + cleanedTranscript.slice(lastTranscript.length));
+        setLastTranscript(cleanedTranscript);
+      }
+    }, 800);
+  }, [transcript]);
+
   return (
     <div className="chat-input-box">
       <form data-testid="chat-input-form" onSubmit={handleSubmit}>
