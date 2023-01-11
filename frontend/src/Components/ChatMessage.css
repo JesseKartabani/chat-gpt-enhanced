@@ -12,13 +12,13 @@
   margin-right: auto;
   display: flex;
   padding: 8px;
+  display: flex;
+  align-items: center;
 }
 
 .message {
   padding-left: 10px;
   padding-right: 10px;
-  display: flex;
-  align-items: center;
 }
 
 .avatar {

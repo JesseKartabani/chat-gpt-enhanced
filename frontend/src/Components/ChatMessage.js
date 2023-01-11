@@ -1,14 +1,25 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import "./ChatMessage.css";
 import { motion } from "framer-motion";
+import { Cursor, useTypewriter } from "react-simple-typewriter";
 
 const ChatMessage = ({ message }) => {
-  // Scrolls to bottom of the page when getting a new message
-  const newContentRef = useRef(null);
+  const [cursorVisible, setCursorVisible] = useState("|");
+
+  const [text] = useTypewriter({
+    words: [message.message],
+  });
 
   useEffect(() => {
-    newContentRef.current.scrollIntoView({ behavior: "smooth" });
-  }, []);
+    if (text.length === message.message.length) {
+      // Typewriter is done, hide the cursor
+      setCursorVisible("");
+    } else {
+      // Typewriter is still typing, show the cursor
+      setCursorVisible("|");
+    }
+  }, [message.message.length, text.length]);
+
   return (
     <motion.div
       // fade messages in
@@ -41,9 +52,16 @@ const ChatMessage = ({ message }) => {
         </div>
 
         {/* Messages */}
-        <div ref={newContentRef} className="message" data-testid="message-text">
-          {message.message}
-        </div>
+        {message.user === "me" && (
+          <div className="message">{message.message}</div>
+        )}
+
+        {message.user === "gpt" && (
+          <div className="message">
+            {text}
+            <Cursor cursorColor="white" cursorStyle={cursorVisible} />
+          </div>
+        )}
       </div>
     </motion.div>
   );
