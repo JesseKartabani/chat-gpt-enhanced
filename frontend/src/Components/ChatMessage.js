@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./ChatMessage.css";
 import { motion } from "framer-motion";
 import { Cursor, useTypewriter } from "react-simple-typewriter";
 
 const ChatMessage = ({ message }) => {
+  const messagesEndRef = useRef(null);
   const [cursorVisible, setCursorVisible] = useState("|");
 
   const [text] = useTypewriter({
@@ -20,6 +21,15 @@ const ChatMessage = ({ message }) => {
       setCursorVisible("|");
     }
   }, [message.message.length, text.length]);
+
+  // auto scroll
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [text]);
 
   return (
     <motion.div
@@ -53,12 +63,13 @@ const ChatMessage = ({ message }) => {
         </div>
 
         {/* Messages */}
+
         {message.user === "me" && (
           <div className="message">{message.message}</div>
         )}
 
         {message.user === "gpt" && (
-          <div className="message">
+          <div ref={messagesEndRef} className="message">
             {text}
             <Cursor cursorColor="white" cursorStyle={cursorVisible} />
           </div>
