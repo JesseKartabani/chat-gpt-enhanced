@@ -1,9 +1,14 @@
 import "./NewChatButton.css";
 import React from "react";
 
-const NewChatButton = ({ clearChat }) => {
+const NewChatButton = ({ clearChat, clearInput }) => {
+  function handleClick() {
+    clearChat();
+    clearInput();
+  }
+
   return (
-    <div className="new-chat-button" onClick={clearChat}>
+    <div className="new-chat-button" onClick={handleClick}>
       <span>+</span>New Chat
     </div>
   );
