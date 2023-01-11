@@ -9,7 +9,7 @@
   resize: none;
   color: white;
   background-color: #40414f;
-  width: 80%;
+  width: 60%;
   border-radius: 5px;
   border: none;
   outline: none;
@@ -30,7 +30,7 @@
   background-color: #40414f;
   position: absolute;
   bottom: 35px;
-  left: 83%;
+  left: 89%;
   transform: translateX(-50%);
   transform: rotate(90deg);
 }
@@ -46,6 +46,24 @@
   border: 1px solid #40414f;
   opacity: 0.1;
   transition: all 0.2s ease-in-out;
+}
+
+.mic-button {
+  border: 1px solid #373942;
+  border-radius: 10px;
+  color: gray;
+  background-color: #373942;
+  position: absolute;
+  bottom: 25px;
+  left: 0%;
+  transform: translateX(-50%);
+  padding: 6px;
+}
+
+.mic-button:hover {
+  background-color: #202123;
+  border: 1px solid gray;
+  transition: all 0.2s ease-in;
 }
 
 @media (min-width: 1024px) {
@@ -64,6 +82,11 @@
   .submit-button {
     bottom: 91px;
     left: 74%;
+  }
+
+  .mic-button {
+    bottom: 85px;
+    left: 18%;
   }
 
   .submit-svg {

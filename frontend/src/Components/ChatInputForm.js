@@ -26,6 +26,24 @@ const ChatInputForm = ({ input, setInput, handleSubmit, isLoading }) => {
 
   return (
     <div className="chat-input-box">
+      <button className="mic-button">
+        <svg
+          stroke="currentColor"
+          fill="currentColor"
+          width={24}
+          height={24}
+          xmlns="http://www.w3.org/2000/svg"
+          fillRule="evenodd"
+          clipRule="evenodd"
+          className="mic-svg"
+        >
+          <path
+            stroke="none"
+            d="M16 24H8v-1h3.5v-3.018A7.004 7.004 0 0 1 5 13v-2h1v2.01A6.003 6.003 0 0 0 12 19c3.311 0 6-2.689 6-6v-2h1v2a7.004 7.004 0 0 1-6.5 6.982V23H16v1zM7 5c0-2.76 2.24-5 5-5s5 2.24 5 5v8c0 2.76-2.24 5-5 5s-5-2.24-5-5V5zm9 0c0-2.208-1.792-4-4-4S8 2.792 8 5v8c0 2.208 1.792 4 4 4s4-1.792 4-4V5z"
+          />
+        </svg>
+      </button>
+
       <form data-testid="chat-input-form" onSubmit={handleSubmit}>
         <textarea
           data-testid="chat-input-textarea"
