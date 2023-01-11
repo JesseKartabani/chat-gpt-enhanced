@@ -7,11 +7,17 @@ import SpeechRecognition, {
 const ChatInputForm = ({ input, setInput, handleSubmit, isLoading }) => {
   const { transcript, resetTranscript } = useSpeechRecognition();
   const [lastTranscript, setLastTranscript] = useState(transcript);
+  const [isListening, setIsListening] = useState(false);
 
-  useEffect(() => {
-    SpeechRecognition.startListening({ continuous: true });
-    console.log("listening");
-  }, []);
+  function handleToggleListening() {
+    if (isListening) {
+      SpeechRecognition.stopListening();
+      setIsListening(false);
+    } else {
+      SpeechRecognition.startListening({ continuous: true });
+      setIsListening(true);
+    }
+  }
 
   useEffect(() => {
     setTimeout(() => {
@@ -26,7 +32,12 @@ const ChatInputForm = ({ input, setInput, handleSubmit, isLoading }) => {
 
   return (
     <div className="chat-input-box">
-      <button className="mic-button">
+      <button
+        className={`mic-button ${isListening && "listening"} ${
+          isListening === false && "not-listening"
+        }`}
+        onClick={handleToggleListening}
+      >
         <svg
           stroke="currentColor"
           fill="currentColor"

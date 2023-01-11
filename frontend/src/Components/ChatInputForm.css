@@ -66,6 +66,14 @@
   transition: all 0.2s ease-in;
 }
 
+.not-listening {
+  color: rgb(255, 65, 65);
+}
+
+.listening {
+  color: green;
+}
+
 @media (min-width: 1024px) {
   .chat-input-box {
     padding: 24px;
