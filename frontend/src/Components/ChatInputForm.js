@@ -21,7 +21,7 @@ const ChatInputForm = ({ input, setInput, handleSubmit, isLoading }) => {
 
   useEffect(() => {
     setTimeout(() => {
-      //Clean up the transcript
+      //Clean up the transcript and add it to input
       const cleanedTranscript = transcript.trim().replace(/\s+/g, " ");
       if (cleanedTranscript !== lastTranscript) {
         setInput(input + cleanedTranscript.slice(lastTranscript.length));
@@ -58,12 +58,21 @@ const ChatInputForm = ({ input, setInput, handleSubmit, isLoading }) => {
 
       <form data-testid="chat-input-form" onSubmit={handleSubmit}>
         <textarea
+          required={true}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+
+              if (e.target.value.trim() === "") return;
+              if (isLoading) return;
+              handleSubmit(e);
+            }
+          }}
           data-testid="chat-input-textarea"
           className="chat-input-textarea"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Prompt"
-          required={true}
         ></textarea>
         <button
           data-testid="submit-button"

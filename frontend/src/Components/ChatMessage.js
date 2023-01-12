@@ -84,7 +84,7 @@ const ChatMessage = ({ message, isLastMessage }) => {
           <div ref={messagesEndRef} className="message">
             {text}
             <Cursor cursorColor="white" cursorStyle={cursorVisible} />
-            {isLastMessage ? (
+            {isLastMessage && text !== "" ? (
               <button className="copy-text-button" onClick={copyText}>
                 <svg
                   stroke="currentColor"
