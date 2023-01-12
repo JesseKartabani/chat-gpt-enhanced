@@ -9,11 +9,11 @@ Leverages OpenAI's GPT model (text-davinci-003) to generate natural language res
 [OpenAI](https://openai.com/api/)
 
 ## Built Using
-### Frontend
+#### Frontend
 * React
 * Framer Motion
 
-### Backend
+#### Backend
 * Node.js
 * Express
 * OpenAI
