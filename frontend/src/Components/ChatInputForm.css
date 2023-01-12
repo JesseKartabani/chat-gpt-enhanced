@@ -9,7 +9,7 @@
   resize: none;
   color: white;
   background-color: #40414f;
-  width: 60%;
+  width: 50%;
   border-radius: 5px;
   border: none;
   outline: none;
@@ -35,7 +35,7 @@
   background-color: #40414f;
   position: absolute;
   bottom: 35px;
-  left: 75%;
+  left: 70%;
   transform: translateX(-50%);
   transform: rotate(90deg);
 }
@@ -60,7 +60,7 @@
   background-color: #373942;
   position: absolute;
   bottom: 25px;
-  left: 10%;
+  left: 12%;
   transform: translateX(-50%);
   padding: 6px;
 }
