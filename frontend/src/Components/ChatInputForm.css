@@ -23,6 +23,11 @@
   padding-right: 35px;
 }
 
+.submit-svg {
+  width: 16px;
+  height: 16px;
+}
+
 .submit-button {
   border: 1px solid #40414f;
   border-radius: 10px;
@@ -55,7 +60,7 @@
   background-color: #373942;
   position: absolute;
   bottom: 25px;
-  left: 0%;
+  left: 6%;
   transform: translateX(-50%);
   padding: 6px;
 }

@@ -24,6 +24,7 @@ code {
   width: 25%;
   background-color: #202123;
   padding: 4px;
+  display: none;
 }
 
 .chat-box {
@@ -44,14 +45,24 @@ code {
   transform: translate(-50%, -50%);
 }
 
+.mobile-new-chat-button {
+  position: sticky;
+  top: 0px;
+}
+
 @media (min-width: 1024px) {
   .side-menu {
     width: 260px;
     padding: 10px;
+    display: inline;
   }
 
   .circular-progress {
     left: 50%;
+  }
+
+  .mobile-new-chat-button {
+    display: none;
   }
 }
 

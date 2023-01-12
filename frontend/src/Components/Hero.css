@@ -24,6 +24,10 @@
   margin-right: 10px;
 }
 
+.hero-heading {
+  margin-top: 50px;
+}
+
 .info-sub-container {
   display: flex;
   flex-direction: column;

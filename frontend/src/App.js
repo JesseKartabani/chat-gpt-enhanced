@@ -52,6 +52,9 @@ function App() {
       </aside>
 
       <section className="chat-box">
+        <div className="mobile-new-chat-button">
+          <NewChatButton clearChat={clearChat} clearInput={clearInput} />
+        </div>
         {chatLog.length === 0 && <Hero />}
 
         <div className="chat-log">
