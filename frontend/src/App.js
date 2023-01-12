@@ -28,7 +28,7 @@ function App() {
     const messages = chatLogNew.map((message) => message.message).join("\n");
 
     const response = await fetch(
-      "https://chat-gpt-enhanced-backend.herokuapp.com/",
+      "https://chat-gpt-enhanced-backend.herokuapp.com",
       {
         method: "POST",
         headers: {
