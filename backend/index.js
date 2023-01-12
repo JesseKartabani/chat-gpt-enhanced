@@ -14,7 +14,7 @@ const cors = require("cors");
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
-const port = 3080;
+const port = process.env.PORT || 5000;
 
 app.post("/", async (req, res) => {
   const { message } = req.body;
@@ -32,5 +32,5 @@ app.post("/", async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`);
+  console.log(`Server listening at ${port}`);
 });
