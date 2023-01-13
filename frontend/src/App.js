@@ -4,10 +4,22 @@ import ChatInputForm from "./Components/ChatInputForm";
 import ChatMessage from "./Components/ChatMessage";
 import NewChatButton from "./Components/NewChatButton";
 import Hero from "./Components/Hero";
-import ReactGA from "react-ga";
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 
-// Google analytics
-ReactGA.initialize("G-7TSL92D0X3");
+// Analytics
+const firebaseConfig = {
+  apiKey: "AIzaSyBGRLU71c5pzN5WNY5IZtjEuFIZsGdcEjY",
+  authDomain: "chat-gpt-enhanced.firebaseapp.com",
+  projectId: "chat-gpt-enhanced",
+  storageBucket: "chat-gpt-enhanced.appspot.com",
+  messagingSenderId: "869064780631",
+  appId: "1:869064780631:web:81faca4dc336a34935ac12",
+  measurementId: "G-7TSL92D0X3",
+};
+
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 function App() {
   const [input, setInput] = useState("");
