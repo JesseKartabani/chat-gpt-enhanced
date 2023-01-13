@@ -4,8 +4,13 @@ import ChatInputForm from "./Components/ChatInputForm";
 import ChatMessage from "./Components/ChatMessage";
 import NewChatButton from "./Components/NewChatButton";
 import Hero from "./Components/Hero";
+import ReactGA from "react-ga";
 
 function App() {
+  // Google analytics
+  ReactGA.initialize("G-7TSL92D0X3");
+  ReactGA.pageview(window.location.pathname + window.location.search);
+
   const [input, setInput] = useState("");
   const [chatLog, setChatLog] = useState([]);
   const [isLoading, setIsLoading] = useState(null);
