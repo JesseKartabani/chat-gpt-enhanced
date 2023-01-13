@@ -2,7 +2,7 @@ import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import NewChatButton from "../Components/NewChatButton";
 
-describe("NewChatButton", () => {
+describe("New Chat Button", () => {
   it("should render New Chat button", () => {
     const { getByText } = render(<NewChatButton />);
     const div = getByText(/New Chat/);
@@ -10,11 +10,15 @@ describe("NewChatButton", () => {
     expect(div.firstChild).toHaveTextContent("+");
   });
 
-  it("calls the clearChat prop when clicked", () => {
+  it("clears messages and input when clicked", () => {
     const clearChat = jest.fn();
-    const { getByText } = render(<NewChatButton clearChat={clearChat} />);
+    const clearInput = jest.fn();
+    const { getByText } = render(
+      <NewChatButton clearChat={clearChat} clearInput={clearInput} />
+    );
     const button = getByText(/New Chat/);
     fireEvent.click(button);
     expect(clearChat).toHaveBeenCalled();
+    expect(clearInput).toHaveBeenCalled();
   });
 });

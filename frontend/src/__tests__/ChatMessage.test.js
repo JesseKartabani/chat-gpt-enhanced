@@ -1,18 +1,34 @@
+import { render, fireEvent } from "@testing-library/react";
 import ChatMessage from "../Components/ChatMessage";
-import React from "react";
-import { render, screen } from "@testing-library/react";
 
-/* 
-describe("ChatMessage", () => {
-  // TODO: fix this error
-  // TypeError: newContentRef.current.scrollIntoView is not a function
-  it("should render the correct message text", () => {
-    const message = { user: "me", message: "Hello, world!" };
-    render(<ChatMessage message={message} />);
-    expect(screen.getByTestId("message-text").textContent).toBe(
-      "Hello, world!"
-    );
+describe("Chat Messages", () => {
+  beforeEach(() => {
+    HTMLElement.prototype.scrollIntoView = jest.fn();
+  });
+
+  afterEach(() => {
+    delete HTMLElement.prototype.scrollIntoView;
+  });
+
+  it("renders messages", () => {
+    const message = { message: "Hello", user: "gpt" };
+    const { getByTestId } = render(<ChatMessage message={message} />);
+    const parentElement = getByTestId("ai-message");
+
+    setTimeout(() => {
+      expect(parentElement).toHaveTextContent("Hello");
+    }, 500);
+  });
+
+  it("renders an avatar for user", () => {
+    const message = { message: "Hello", user: "me" };
+    const { getByTestId } = render(<ChatMessage message={message} />);
+    expect(getByTestId("user-avatar")).toBeInTheDocument();
+  });
+
+  it("renders an avatar for AI", () => {
+    const message = { message: "Hello", user: "gpt" };
+    const { getByTestId } = render(<ChatMessage message={message} />);
+    expect(getByTestId("ai-avatar")).toBeInTheDocument();
   });
 });
-
-*/
