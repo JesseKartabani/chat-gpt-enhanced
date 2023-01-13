@@ -1,0 +1,30 @@
+.google-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #474749;
+  border-radius: 10px;
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 200px;
+  background: linear-gradient(265.27deg, #0000 20.55%, #414350 94.17%);
+  background-color: #414350;
+  transition: all 0.2s ease-in;
+  color: white;
+}
+
+.google-button-container {
+  position: fixed;
+  bottom: 20px;
+  left: 40px;
+}
+
+.google-button:hover {
+  background-color: #8bb2ff;
+  border-color: black;
+}
+
+.google-button:active {
+  opacity: 0.2;
+}

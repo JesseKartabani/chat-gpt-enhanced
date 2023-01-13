@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CircularProgress } from "@mui/material";
 import ChatInputForm from "./Components/ChatInputForm";
 import ChatMessage from "./Components/ChatMessage";
@@ -6,6 +6,15 @@ import NewChatButton from "./Components/NewChatButton";
 import Hero from "./Components/Hero";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import {
+  GoogleAuthProvider,
+  getAuth,
+  signInWithRedirect,
+  getRedirectResult,
+  signOut,
+  onAuthStateChanged,
+} from "firebase/auth";
+import GoogleAuthButtons from "./Components/GoogleAuthButtons";
 
 // Analytics
 const firebaseConfig = {
@@ -19,9 +28,53 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
 const analytics = getAnalytics(app);
+const provider = new GoogleAuthProvider(app);
+const auth = getAuth(app);
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  function handleLogin() {
+    signInWithRedirect(auth, provider);
+
+    getRedirectResult(auth)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access Google APIs.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+
+        // The signed-in user info.
+        const user = result.user;
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+      });
+  }
+
+  function handleLogout() {
+    signOut(auth)
+      .then(() => {
+        console.log("Logged out");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+  }, []);
+
   const [input, setInput] = useState("");
   const [chatLog, setChatLog] = useState([]);
   const [isLoading, setIsLoading] = useState(null);
@@ -65,6 +118,11 @@ function App() {
     <div className="App">
       <aside className="side-menu">
         <NewChatButton clearChat={clearChat} clearInput={clearInput} />
+        <GoogleAuthButtons
+          user={user}
+          handleLogin={handleLogin}
+          handleLogout={handleLogout}
+        />
       </aside>
 
       <section className="chat-box">
