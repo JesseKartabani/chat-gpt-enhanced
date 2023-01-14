@@ -15,9 +15,9 @@
 }
 
 .google-button-container {
-  position: fixed;
-  bottom: 20px;
-  left: 40px;
+  position: absolute;
+  bottom: 50px;
+  left: 90px;
 }
 
 .google-button:hover {
@@ -27,4 +27,12 @@
 
 .google-button:active {
   opacity: 0.2;
+}
+
+@media (min-width: 1024px) {
+  .google-button-container {
+    position: fixed;
+    bottom: 20px;
+    left: 40px;
+  }
 }

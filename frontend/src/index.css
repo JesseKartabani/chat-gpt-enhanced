@@ -64,6 +64,10 @@ code {
   .mobile-new-chat-button {
     display: none;
   }
+
+  .mobile-login-button {
+    display: none;
+  }
 }
 
 ::-webkit-scrollbar {

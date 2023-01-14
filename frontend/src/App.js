@@ -110,9 +110,7 @@ function App() {
         message: input,
         timestamp: Date.now(),
       })
-        .then(() => {
-          console.log("Data saved successfully!");
-        })
+        .then(() => {})
         .catch((error) => {
           console.log("The write failed...", error);
         });
@@ -144,9 +142,7 @@ function App() {
         message: data.message,
         timestamp: Date.now(),
       })
-        .then(() => {
-          console.log("Data saved successfully!");
-        })
+        .then(() => {})
         .catch((error) => {
           console.log("The write failed...", error);
         });
@@ -198,11 +194,23 @@ function App() {
           )}
         </div>
 
+        {/* Login button for mobile */}
+        {!user && (
+          <div className="mobile-login-button">
+            <GoogleAuthButtons
+              user={user}
+              handleLogin={handleLogin}
+              handleLogout={handleLogout}
+            />
+          </div>
+        )}
+
         <ChatInputForm
           input={input}
           setInput={setInput}
           handleSubmit={handleSubmit}
           isLoading={isLoading}
+          user={user}
         />
       </section>
     </div>

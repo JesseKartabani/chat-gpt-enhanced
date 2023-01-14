@@ -1,0 +1,20 @@
+.sign-up-heading {
+  font-size: 1.4em;
+}
+
+.sign-up-heading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -110px;
+}
+
+@media (min-width: 1024px) {
+  .sign-up-heading {
+    font-size: 2em;
+  }
+
+  .sign-up-heading-container {
+    margin-top: -150px;
+  }
+}
