@@ -14,7 +14,9 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
+import { getDatabase, ref, set, push } from "firebase/database";
 import GoogleAuthButtons from "./Components/GoogleAuthButtons";
+import MessageHistory from "./Components/MessageHistory";
 
 // Analytics
 const firebaseConfig = {
@@ -25,6 +27,7 @@ const firebaseConfig = {
   messagingSenderId: "869064780631",
   appId: "1:869064780631:web:81faca4dc336a34935ac12",
   measurementId: "G-7TSL92D0X3",
+  databaseURL: "https://chat-gpt-enhanced-default-rtdb.firebaseio.com/",
 };
 
 const app = initializeApp(firebaseConfig);
@@ -32,9 +35,17 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const provider = new GoogleAuthProvider(app);
 const auth = getAuth(app);
+const db = getDatabase(app);
 
 function App() {
   const [user, setUser] = useState(null);
+  const [conversationId, setConversationId] = useState(null);
+
+  function handleNewChat() {
+    if (user) {
+      setConversationId(user.uid + Date.now());
+    }
+  }
 
   function handleLogin() {
     signInWithRedirect(auth, provider);
@@ -72,6 +83,7 @@ function App() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setUser(user);
+      setConversationId(user.uid + Date.now());
     });
   }, []);
 
@@ -89,7 +101,23 @@ function App() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    const chatRef = ref(db, `messages/${user.uid}/${conversationId}`);
     let chatLogNew = [...chatLog, { user: "me", message: `${input}` }];
+
+    if (user) {
+      push(chatRef, {
+        user: "me",
+        message: input,
+        timestamp: Date.now(),
+      })
+        .then(() => {
+          console.log("Data saved successfully!");
+        })
+        .catch((error) => {
+          console.log("The write failed...", error);
+        });
+    }
+
     clearInput();
     setChatLog(chatLogNew);
     setIsLoading(true);
@@ -110,6 +138,20 @@ function App() {
     );
 
     const data = await response.json();
+    if (user) {
+      push(chatRef, {
+        user: "gpt",
+        message: data.message,
+        timestamp: Date.now(),
+      })
+        .then(() => {
+          console.log("Data saved successfully!");
+        })
+        .catch((error) => {
+          console.log("The write failed...", error);
+        });
+    }
+
     setChatLog([...chatLogNew, { user: "gpt", message: `${data.message}` }]);
     setIsLoading(false);
   }
@@ -117,7 +159,19 @@ function App() {
   return (
     <div className="App">
       <aside className="side-menu">
-        <NewChatButton clearChat={clearChat} clearInput={clearInput} />
+        <NewChatButton
+          clearChat={clearChat}
+          clearInput={clearInput}
+          handleNewChat={handleNewChat}
+        />
+        {user && (
+          <MessageHistory
+            userId={user.uid}
+            conversationId={conversationId}
+            db={db}
+          />
+        )}
+
         <GoogleAuthButtons
           user={user}
           handleLogin={handleLogin}
