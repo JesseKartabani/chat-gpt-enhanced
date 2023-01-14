@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ref, get } from "firebase/database";
+import "./MessageHistory.css";
 
 function MessageHistory({ userId, db }) {
   const [messageHistory, setMessageHistory] = useState([]);
@@ -20,7 +21,9 @@ function MessageHistory({ userId, db }) {
                   firstMessages.push(firstMessage);
                   // Check if all conversations have been processed
                   if (firstMessages.length === conversationIds.length) {
-                    setMessageHistory(firstMessages);
+                    // Reverse the order of the messages
+                    const reversedMessages = firstMessages.reverse();
+                    setMessageHistory(reversedMessages);
                   }
                 } else {
                   console.log("No data available");
@@ -38,9 +41,29 @@ function MessageHistory({ userId, db }) {
   return (
     <div>
       {messageHistory.map((message, index) => (
-        <div key={index}>
-          <p>{message.user === "me" && message.message}</p>
-        </div>
+        // First message user sent for each conversation
+        <button className="message-button" key={index}>
+          <div className="message-container">
+            <svg
+              stroke="currentColor"
+              fill="none"
+              strokeWidth={2}
+              viewBox="0 0 24 24"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="message-svg"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+            </svg>
+            <p className="truncate-text">
+              {message.user === "me" &&
+                // Uppercase first character of message
+                message.message.charAt(0).toUpperCase() +
+                  message.message.slice(1)}
+            </p>
+          </div>
+        </button>
       ))}
     </div>
   );
