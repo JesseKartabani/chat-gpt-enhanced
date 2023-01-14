@@ -1,3 +1,12 @@
+.message-history-container {
+  overflow: scroll;
+  overflow-x: hidden;
+  max-height: 500px;
+  margin-top: 30px;
+  border-bottom: 1px solid #404143;
+  margin-right: -8px;
+}
+
 .message-button {
   background-color: #202123;
   border: none;
@@ -13,10 +22,7 @@
   background-color: #202123;
   color: #e3e3e9;
   border: none;
-}
-
-.message-container:first-child {
-  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .truncate-text {

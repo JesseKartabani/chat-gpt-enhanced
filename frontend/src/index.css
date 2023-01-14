@@ -68,6 +68,7 @@ code {
 
 ::-webkit-scrollbar {
   background-color: #343541;
+  width: 0.4em;
 }
 
 ::-webkit-scrollbar-thumb {

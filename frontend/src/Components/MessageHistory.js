@@ -39,7 +39,7 @@ function MessageHistory({ userId, db }) {
   }, [userId, db]);
 
   return (
-    <div>
+    <div className="message-history-container">
       {messageHistory.map((message, index) => (
         // First message user sent for each conversation
         <button className="message-button" key={index}>
