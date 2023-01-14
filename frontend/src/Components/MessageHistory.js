@@ -9,15 +9,19 @@ function MessageHistory({ userId, db }) {
       get(ref(db, `messages/${userId}/`)).then((snapshot) => {
         if (snapshot.exists()) {
           const conversationIds = Object.keys(snapshot.val());
-          // Now you can use the conversationIds to get the messageHistory
+          // Create an array to hold the first message of each conversation
+          const firstMessages = [];
           conversationIds.forEach((conversationId) => {
             get(ref(db, `messages/${userId}/${conversationId}`)).then(
               (snapshot) => {
                 if (snapshot.exists()) {
-                  setMessageHistory((prevMessages) => [
-                    ...prevMessages,
-                    ...Object.values(snapshot.val()),
-                  ]);
+                  // Get the first message of the conversation
+                  const firstMessage = Object.values(snapshot.val())[0];
+                  firstMessages.push(firstMessage);
+                  // Check if all conversations have been processed
+                  if (firstMessages.length === conversationIds.length) {
+                    setMessageHistory(firstMessages);
+                  }
                 } else {
                   console.log("No data available");
                 }
