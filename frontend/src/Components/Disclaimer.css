@@ -1,0 +1,18 @@
+.disclaimer-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  font-size: 11px;
+}
+
+.disclaimer-text {
+  color: rgba(128, 128, 128, 0.5);
+}
+
+@media (min-width: 1024px) {
+  .disclaimer-container {
+    bottom: 0;
+    font-size: 13px;
+  }
+}

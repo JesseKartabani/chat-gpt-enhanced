@@ -17,6 +17,7 @@ import {
 import { ref, push } from "firebase/database";
 import StoreButton from "../Components/StoreButton";
 import "./MainPage.css";
+import Disclaimer from "../Components/Disclaimer";
 
 function MainPage({ app, db }) {
   const provider = new GoogleAuthProvider(app);
@@ -203,6 +204,7 @@ function MainPage({ app, db }) {
           isLoading={isLoading}
           user={user}
         />
+        <Disclaimer />
       </section>
     </div>
   );
