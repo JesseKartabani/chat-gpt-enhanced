@@ -1,0 +1,44 @@
+.store-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.store-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: white;
+  margin-top: 40px;
+  transition: all 0.1s ease-in-out;
+  background-color: #373943;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.store-link:hover {
+  scale: 1.04;
+  border-color: #8bb2ff;
+}
+
+.store-link:active {
+  opacity: 0.2;
+}
+
+.store-button-svg {
+  color: white;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+@media (min-width: 1024px) {
+  .store-link {
+    margin-top: 20px;
+    background-color: #202123;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}

@@ -1,0 +1,53 @@
+.side-menu {
+  width: 25%;
+  background-color: #202123;
+  padding: 4px;
+  display: none;
+}
+
+.chat-box {
+  flex: 1;
+  position: relative;
+  background: linear-gradient(to top, #353740, #444654);
+}
+
+.chat-log {
+  text-align: left;
+}
+
+.circular-progress {
+  margin-top: 20px;
+  position: relative;
+  top: 50%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+}
+
+.mobile-new-chat-button {
+  position: sticky;
+  top: 0px;
+}
+
+@media (min-width: 1024px) {
+  .side-menu {
+    width: 260px;
+    padding: 10px;
+    display: inline;
+  }
+
+  .circular-progress {
+    left: 50%;
+  }
+
+  .mobile-new-chat-button {
+    display: none;
+  }
+
+  .mobile-login-button {
+    display: none;
+  }
+
+  .mobile-store-button {
+    display: none;
+  }
+}
