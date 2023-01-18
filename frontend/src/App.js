@@ -3,6 +3,7 @@ import { getAnalytics } from "firebase/analytics";
 import { getDatabase } from "firebase/database";
 import { Route, Routes } from "react-router-dom";
 import MainPage from "./Pages/MainPage";
+import DevLogsPage from "./Pages/DevLogsPage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBGRLU71c5pzN5WNY5IZtjEuFIZsGdcEjY",
@@ -23,6 +24,8 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<MainPage app={app} db={db} />} />
+
+      <Route path="/developer-logs" element={<DevLogsPage />} />
     </Routes>
   );
 }

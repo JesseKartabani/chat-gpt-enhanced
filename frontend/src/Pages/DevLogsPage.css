@@ -1,0 +1,42 @@
+.dev-log-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.list {
+  margin: 10px;
+}
+
+.recent-updates-container {
+  background-color: #202123;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 30px;
+  margin: 2px;
+  padding-bottom: 60px;
+  margin-bottom: 10px;
+}
+
+.dev-log-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.return-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+@media (min-width: 1024px) {
+  .recent-updates-container {
+    width: 600px;
+  }
+}

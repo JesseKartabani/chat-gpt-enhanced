@@ -98,7 +98,7 @@ const ChatMessage = ({ message, isLastMessage }) => {
             {text.trimStart()}
             <Cursor cursorColor="white" cursorStyle={cursorVisible} />
             {/* Copy to clipboard button if its the last message */}
-            {isLastMessage && copyButtonVisible ? (
+            {isLastMessage && copyButtonVisible && text !== "" ? (
               <button
                 className="copy-text-button"
                 onClick={copyText}
