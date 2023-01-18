@@ -19,6 +19,21 @@
   margin-bottom: 10px;
 }
 
+.other-projects-container {
+  display: flex;
+
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #202123;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 30px;
+  margin: 2px;
+  padding-bottom: 60px;
+  margin-bottom: 10px;
+}
+
 .dev-log-header {
   display: flex;
   justify-content: center;
@@ -35,8 +50,35 @@
   margin-bottom: 5px;
 }
 
+.project-image {
+  width: 100%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.project-link {
+  color: white;
+  text-decoration: none;
+}
+
+.project-link:hover {
+  scale: 1.04;
+  transition: scale 0.2s ease-in-out;
+}
+
+.project-link:active {
+  opacity: 0.2;
+  transition: opacity 0.1s ease-in-out;
+}
+
 @media (min-width: 1024px) {
   .recent-updates-container {
+    width: 600px;
+  }
+
+  .other-projects-container {
     width: 600px;
   }
 }

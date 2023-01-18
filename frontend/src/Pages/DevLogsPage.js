@@ -57,6 +57,21 @@ function DevLogsPage() {
           </li>
         </ul>
       </div>
+
+      <div className="other-projects-container">
+        <h2>Other AI Projects By Me</h2>
+        <a
+          href="https://ai-image-generator-f4c78.web.app/"
+          className="project-link"
+        >
+          <h3 className="text-center">Image Generator</h3>
+          <img
+            className="project-image"
+            src={require("../assets/imageGenProject.png")}
+            alt="AI Image generator project"
+          ></img>
+        </a>
+      </div>
     </div>
   );
 }
