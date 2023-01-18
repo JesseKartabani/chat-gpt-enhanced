@@ -5,6 +5,7 @@
   margin-top: 30px;
   border-bottom: 1px solid #404143;
   margin-right: -8px;
+  position: fixed;
 }
 
 .message-button {

@@ -5,6 +5,7 @@ import { Cursor, useTypewriter } from "react-simple-typewriter";
 
 const ChatMessage = ({ message, isLastMessage }) => {
   const messagesEndRef = useRef(null);
+  const [copyButtonVisible, setCopyButtonVisible] = useState(false);
   const [cursorVisible, setCursorVisible] = useState("|");
   const [buttonText, setButtonText] = useState("Copy");
 
@@ -17,9 +18,11 @@ const ChatMessage = ({ message, isLastMessage }) => {
     if (text.length === message.message.length) {
       // Typewriter is done, hide the cursor
       setCursorVisible("");
+      setCopyButtonVisible(true);
     } else {
       // Typewriter is still typing, show the cursor
       setCursorVisible("|");
+      setCopyButtonVisible(false);
     }
   }, [message.message.length, text.length]);
 
@@ -82,7 +85,7 @@ const ChatMessage = ({ message, isLastMessage }) => {
 
         {/* Messages */}
         {message.user === "me" && (
-          <div className="message">{message.message}</div>
+          <div className="message">{message.message.split("\n")}</div>
         )}
 
         {message.user === "gpt" && (
@@ -92,10 +95,10 @@ const ChatMessage = ({ message, isLastMessage }) => {
             data-testid="ai-message"
           >
             {/* Typewriter text followed by cursor */}
-            {text}
+            {text.trimStart()}
             <Cursor cursorColor="white" cursorStyle={cursorVisible} />
             {/* Copy to clipboard button if its the last message */}
-            {isLastMessage && text !== "" ? (
+            {isLastMessage && copyButtonVisible ? (
               <button
                 className="copy-text-button"
                 onClick={copyText}
@@ -108,7 +111,6 @@ const ChatMessage = ({ message, isLastMessage }) => {
                   viewBox="0 0 24 24"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="h-4 w-4"
                   height="1.5em"
                   width="1.5em"
                   xmlns="http://www.w3.org/2000/svg"

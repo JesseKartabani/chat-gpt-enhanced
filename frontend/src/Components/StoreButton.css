@@ -41,4 +41,10 @@
     padding-left: 10px;
     padding-right: 10px;
   }
+
+  .store-button-container {
+    position: fixed;
+    bottom: 100px;
+    left: 50px;
+  }
 }

@@ -20,6 +20,7 @@
   position: relative;
   padding-left: 10px;
   padding-right: 10px;
+  white-space: pre-wrap;
 }
 
 .avatar {
@@ -43,7 +44,7 @@
 .copy-text-button {
   position: absolute;
   display: none;
-  top: 0;
+  top: 0px;
   background-color: #444654;
   color: white;
   border: 1px solid gray;
@@ -85,7 +86,7 @@
   }
 
   .copy-text-button {
-    right: -150px;
+    right: -50px;
     display: flex;
     justify-content: center;
     align-items: center;
