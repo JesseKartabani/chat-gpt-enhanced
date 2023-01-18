@@ -15,9 +15,10 @@
 }
 
 .google-button-container {
-  position: absolute;
-  bottom: 50px;
-  left: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .google-button:hover {
@@ -34,5 +35,6 @@
     position: fixed;
     bottom: 20px;
     left: 40px;
+    margin-top: 0px;
   }
 }
