@@ -74,7 +74,6 @@ function MainPage({ app, db }) {
 
   const [input, setInput] = useState("");
   const [chatLog, setChatLog] = useState([]);
-  const [temperature, setTemperature] = useState(0.5);
   const [isLoading, setIsLoading] = useState(null);
 
   function clearChat() {
@@ -89,7 +88,6 @@ function MainPage({ app, db }) {
     e.preventDefault();
     const chatRef = ref(db, `messages/${user.uid}/${conversationId}`);
     let chatLogNew = [...chatLog, { user: "me", message: `${input}` }];
-    const modelTemperature = temperature;
 
     if (user) {
       push(chatRef, {
@@ -116,10 +114,9 @@ function MainPage({ app, db }) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: {
+        body: JSON.stringify({
           message: messages,
-          temperature: modelTemperature,
-        },
+        }),
       }
     );
 
