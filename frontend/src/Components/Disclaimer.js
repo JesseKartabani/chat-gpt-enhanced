@@ -6,10 +6,10 @@ function Disclaimer() {
   return (
     <div className="disclaimer-container">
       <p className="disclaimer-text">
-        Disclaimer: Not affiliated with or endorsed by OpenAI
+        Not affiliated with or endorsed by OpenAI
       </p>
       <Link className="dev-log-link" to={"/developer-logs"}>
-        Upcoming Updates
+        Development Progress, Bug Reports, and Feature Requests
       </Link>
     </div>
   );
