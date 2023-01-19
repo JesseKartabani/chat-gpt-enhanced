@@ -42,6 +42,7 @@
   background: linear-gradient(265.27deg, #0000 20.55%, white 94.17%);
   background-color: white;
   transition: all 0.2s ease-in-out;
+  font-weight: bold;
 }
 
 .open-modal-button:hover {
@@ -64,6 +65,7 @@
   background: linear-gradient(265.27deg, #0000 20.55%, white 94.17%);
   background-color: white;
   transition: all 0.2s ease-in-out;
+  font-weight: 600;
 }
 
 .submit-bug-button:hover {
