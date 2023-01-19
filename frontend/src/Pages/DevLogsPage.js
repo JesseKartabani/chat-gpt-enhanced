@@ -1,8 +1,9 @@
 import React from "react";
 import "./DevLogsPage.css";
 import { Link } from "react-router-dom";
+import BugReportModal from "../Components/BugReportModal";
 
-function DevLogsPage() {
+function DevLogsPage({ db }) {
   return (
     <div className="dev-log-container">
       <h1>Developer Logs</h1>
@@ -20,6 +21,8 @@ function DevLogsPage() {
         Return to Home
       </Link>
 
+      <BugReportModal db={db} />
+
       <div className="recent-updates-container">
         <h2>Upcoming Updates</h2>
         <p>
@@ -33,24 +36,32 @@ function DevLogsPage() {
             Adjust the balance of logical and creative thinking for the AI to
             best suit your needs
           </li>
+          <br />
           <li>
             Finishing the message history so you can load your old messages
           </li>
-          <li>
-            Allowing you to report bugs & request changes/features you'd like to
-            see
-          </li>
+          <br />
+          <li>Allowing you to request changes/features you'd like to see</li>
         </ul>
       </div>
 
       <div className="recent-updates-container">
         <h2>Recent Updates </h2>
         <ul className="list">
-          <h3>(Jan 18)</h3>
+          <h3>(Jan 18/19)</h3>
+          <li>Bug reporting is now available</li>
+          <br />
+          <li>
+            Prompt limit now set to 500 characters to reduce costs. Sorry for
+            the inconvenience, but it's necessary to keep the service free of
+            charge.
+          </li>
+          <br />
           <li>
             More than <b>doubled</b> the amount of words the AI can respond with
             (limit was 100 tokens it's now up to 256)
           </li>
+          <br />
           <li>
             AI responses have been enhanced with proper formatting, including
             new line breaks and appropriate spacing

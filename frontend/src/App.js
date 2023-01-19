@@ -26,7 +26,7 @@ function App() {
     <Routes>
       <Route path="/" element={<MainPage app={app} db={db} />} />
 
-      <Route path="/developer-logs" element={<DevLogsPage />} />
+      <Route path="/developer-logs" element={<DevLogsPage db={db} />} />
 
       <Route path="*" element={<Error404Page />} />
     </Routes>
