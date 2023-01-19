@@ -37,13 +37,10 @@ function DevLogsPage({ db }) {
         </p>
         <ul className="list">
           <li>
-            Adjust the balance of logical and creative thinking for the AI to
-            best suit your needs
-          </li>
-          <br />
-          <li>
             Finishing the message history so you can load your old messages
           </li>
+          <br />
+          <li>Syntax highlighting for code</li>
         </ul>
       </div>
 
@@ -51,6 +48,11 @@ function DevLogsPage({ db }) {
         <h2>Recent Updates </h2>
         <ul className="list">
           <h3>(Jan 18/19)</h3>
+          <li>
+            Adjust the balance of logical and creative thinking for the AI to
+            best suit your needs with the new slider above your prompt
+          </li>
+          <br />
           <li>
             Reporting bugs & requesting new features is now available (check the
             top of this page)
