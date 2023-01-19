@@ -21,7 +21,6 @@
 
 .other-projects-container {
   display: flex;
-
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -48,6 +47,22 @@
   text-decoration: none;
   margin-right: 10px;
   margin-bottom: 5px;
+  background: linear-gradient(265.27deg, #0000 20.55%, #343541 94.17%);
+  background-color: #343541;
+  border: 1px solid #343541;
+  border-radius: 10px;
+  padding: 5px;
+  transition: all 0.2s ease-in-out;
+}
+
+.return-link:hover {
+  background-color: #8bb2ff;
+  border-color: white;
+  scale: 1.07;
+}
+
+.return-link:active {
+  opacity: 0.2;
 }
 
 .project-image {

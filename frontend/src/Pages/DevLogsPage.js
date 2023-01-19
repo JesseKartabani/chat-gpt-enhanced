@@ -53,7 +53,7 @@ function DevLogsPage({ db }) {
           <h3>(Jan 18/19)</h3>
           <li>
             Reporting bugs & requesting new features is now available (check the
-            top of this page)6
+            top of this page)
           </li>
           <br />
           <li>

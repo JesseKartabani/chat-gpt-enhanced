@@ -48,6 +48,7 @@
 .open-modal-button:hover {
   background-color: #8bb2ff;
   border-color: black;
+  scale: 1.08;
 }
 
 .open-modal-button:active {
