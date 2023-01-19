@@ -18,6 +18,7 @@ import { ref, push } from "firebase/database";
 import StoreButton from "../Components/StoreButton";
 import "./MainPage.css";
 import Disclaimer from "../Components/Disclaimer";
+import TemperatureSlider from "../Components/TemperatureSlider";
 
 function MainPage({ app, db }) {
   const provider = new GoogleAuthProvider(app);
@@ -74,6 +75,7 @@ function MainPage({ app, db }) {
 
   const [input, setInput] = useState("");
   const [chatLog, setChatLog] = useState([]);
+  const [temperature, setTemperature] = useState(0.5);
   const [isLoading, setIsLoading] = useState(null);
 
   function clearChat() {
@@ -116,6 +118,7 @@ function MainPage({ app, db }) {
         },
         body: JSON.stringify({
           message: messages,
+          temperature: temperature,
         }),
       }
     );
@@ -182,7 +185,9 @@ function MainPage({ app, db }) {
             />
           ))}
           {isLoading === true && (
-            <CircularProgress className="circular-progress" />
+            <div className="circular-progress">
+              <CircularProgress />
+            </div>
           )}
         </div>
 
@@ -197,6 +202,8 @@ function MainPage({ app, db }) {
           </div>
         )}
 
+        <TemperatureSlider setTemperature={setTemperature} user={user} />
+
         <ChatInputForm
           input={input}
           setInput={setInput}
@@ -204,6 +211,7 @@ function MainPage({ app, db }) {
           isLoading={isLoading}
           user={user}
         />
+
         <Disclaimer />
       </section>
     </div>

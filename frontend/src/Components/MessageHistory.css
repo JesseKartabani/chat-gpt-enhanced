@@ -1,7 +1,7 @@
 .message-history-container {
   overflow: scroll;
   overflow-x: hidden;
-  max-height: 500px;
+  max-height: 40%;
   margin-top: 30px;
   border-bottom: 1px solid #404143;
   margin-right: -8px;

@@ -1,0 +1,27 @@
+.temperature-container {
+  display: none;
+  position: absolute;
+  bottom: 175px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}
+
+.temperature-headings {
+  display: flex;
+  flex-direction: row;
+}
+
+.temperature-description {
+  margin-top: -10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+@media (min-width: 1024px) {
+  .temperature-container {
+    display: inline;
+  }
+}

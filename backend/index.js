@@ -18,12 +18,13 @@ const port = process.env.PORT || 5000;
 
 app.post("/", async (req, res) => {
   const { message } = req.body;
+  const { temperature } = req.body;
 
   const response = await openai.createCompletion({
     model: "text-davinci-003",
     prompt: `${message}`,
     max_tokens: 256,
-    temperature: 0.5,
+    temperature: temperature,
   });
 
   res.json({

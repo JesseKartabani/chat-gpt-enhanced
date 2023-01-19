@@ -17,10 +17,9 @@
 
 .circular-progress {
   margin-top: 20px;
-  position: relative;
-  top: 50%;
-  left: 45%;
-  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .mobile-new-chat-button {
@@ -33,10 +32,6 @@
     width: 260px;
     padding: 10px;
     display: inline;
-  }
-
-  .circular-progress {
-    left: 50%;
   }
 
   .mobile-new-chat-button {
