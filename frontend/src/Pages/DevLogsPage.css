@@ -73,6 +73,10 @@
   transition: opacity 0.1s ease-in-out;
 }
 
+.modals {
+  display: flex;
+}
+
 @media (min-width: 1024px) {
   .recent-updates-container {
     width: 600px;

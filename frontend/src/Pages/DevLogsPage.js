@@ -2,6 +2,7 @@ import React from "react";
 import "./DevLogsPage.css";
 import { Link } from "react-router-dom";
 import BugReportModal from "../Components/BugReportModal";
+import FeatureRequestModal from "../Components/FeatureRequestModal";
 
 function DevLogsPage({ db }) {
   return (
@@ -21,7 +22,10 @@ function DevLogsPage({ db }) {
         <b>Return to Home</b>
       </Link>
 
-      <BugReportModal db={db} />
+      <div className="modals">
+        <BugReportModal db={db} />
+        <FeatureRequestModal db={db} />
+      </div>
 
       <div className="recent-updates-container">
         <h2>Upcoming Updates</h2>
@@ -40,8 +44,6 @@ function DevLogsPage({ db }) {
           <li>
             Finishing the message history so you can load your old messages
           </li>
-          <br />
-          <li>Allowing you to request changes/features you'd like to see</li>
         </ul>
       </div>
 
@@ -49,7 +51,10 @@ function DevLogsPage({ db }) {
         <h2>Recent Updates </h2>
         <ul className="list">
           <h3>(Jan 18/19)</h3>
-          <li>Bug reporting is now available</li>
+          <li>
+            Reporting bugs & requesting new features is now available (check the
+            top of this page)6
+          </li>
           <br />
           <li>
             Prompt limit now set to 500 characters to reduce costs. Sorry for
