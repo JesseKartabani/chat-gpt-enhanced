@@ -64,7 +64,7 @@ const ChatInputForm = ({ input, setInput, handleSubmit, isLoading, user }) => {
 
           <form data-testid="chat-input-form" onSubmit={handleSubmit}>
             <textarea
-              maxLength="500" // Adjust this as needed
+              maxLength="400" // Adjust this as needed
               required={true}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
