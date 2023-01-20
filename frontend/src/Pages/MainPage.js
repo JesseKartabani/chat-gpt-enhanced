@@ -210,6 +210,7 @@ function MainPage({ app, db }) {
           handleSubmit={handleSubmit}
           isLoading={isLoading}
           user={user}
+          handleLogin={handleLogin}
         />
 
         <Disclaimer />

@@ -5,7 +5,14 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import SignUpHeading from "./SignUpHeading";
 
-const ChatInputForm = ({ input, setInput, handleSubmit, isLoading, user }) => {
+const ChatInputForm = ({
+  input,
+  setInput,
+  handleSubmit,
+  isLoading,
+  user,
+  handleLogin,
+}) => {
   const { transcript } = useSpeechRecognition();
   const [lastTranscript, setLastTranscript] = useState(transcript);
   const [isListening, setIsListening] = useState(false);
@@ -33,7 +40,7 @@ const ChatInputForm = ({ input, setInput, handleSubmit, isLoading, user }) => {
 
   return (
     <div className="chat-input-box">
-      {!user && <SignUpHeading />}
+      {!user && <SignUpHeading handleLogin={handleLogin} />}
 
       {/* Only show chat input if user is signed in */}
       {user && (
