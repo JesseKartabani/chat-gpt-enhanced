@@ -71,9 +71,11 @@ function StorePage({ app }) {
     <div className="store-container">
       <h1 className="store-heading">ChatGPT Enhanced</h1>
 
+      {/* 
       <div>
         <button className="monthly-button">MONTHLY</button>
       </div>
+      */}
 
       <motion.div
         // animate in from the left of the screen
