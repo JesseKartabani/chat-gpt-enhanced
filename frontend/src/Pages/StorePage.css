@@ -1,0 +1,182 @@
+.store-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #151419;
+}
+
+.sub-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #23242a;
+  border-radius: 10px;
+  box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, 0.4),
+    -2px -2px 8px 0px rgba(0, 0, 0, 0.4);
+}
+
+.store-recommended {
+  background-color: #3f8cff;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 8px;
+  text-align: center;
+}
+
+.monthly-button {
+  margin-top: 0px;
+  margin-bottom: 30px;
+  letter-spacing: 0.04em;
+  background-color: #0d0c0f;
+  color: white;
+  padding: 8px;
+  padding-left: 40px;
+  padding-right: 40px;
+  border-radius: 8px;
+  border-color: #0d0c0f;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.store-heading {
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+.sub-role {
+  text-align: center;
+}
+
+.text-gray {
+  color: #636468;
+  text-align: center;
+}
+
+.pricing {
+  text-align: center;
+}
+
+.price {
+  font-weight: 800;
+  font-size: 1.5em;
+  margin-left: 20px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.sub-button {
+  padding: 10px;
+  margin: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background: linear-gradient(265.27deg, #0000 20.55%, #3f8cff 94.17%);
+  background-color: #3f8cff;
+  transition: all 0.2s ease-in;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  border-color: #3f8cff;
+  border-radius: 5px;
+  font-weight: 600;
+}
+
+.sub-button:hover {
+  background-color: #7fa9ee;
+  scale: 1.04;
+}
+
+.sub-button:active {
+  opacity: 0.2;
+}
+
+.home-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  background: linear-gradient(265.27deg, #0000 20.55%, #0d0c0f 94.17%);
+  background-color: #0d0c0f;
+  border-radius: 10px;
+  padding: 8px;
+  transition: all 0.2s ease-in-out;
+}
+
+.home-button:hover {
+  background-color: #7fa9ee;
+  scale: 1.04;
+}
+
+.home-button:active {
+  opacity: 0.2;
+}
+
+.currency-type {
+  font-size: 0.4em;
+  font-weight: 400;
+  margin-left: 5px;
+}
+
+@media (min-width: 1024px) {
+  .home-button {
+    margin-top: 80px;
+  }
+
+  .sub-card {
+    width: 400px;
+  }
+
+  .sub-features {
+    margin-top: 30px;
+  }
+
+  .sub-button {
+    margin: 20px;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    font-size: 1em;
+  }
+
+  .store-heading {
+    font-size: 3em;
+  }
+
+  .monthly-button {
+    font-size: 0.9em;
+  }
+
+  .sub-card {
+    font-size: 1em;
+  }
+
+  .store-recommended {
+    font-size: 0.9em;
+  }
+
+  .store-subheading {
+    font-size: 2em;
+  }
+
+  .monthly-button {
+    margin-top: 80px;
+    margin-bottom: 80px;
+  }
+
+  .price {
+    font-size: 2em;
+  }
+
+  .feature {
+    margin-left: 20px;
+    margin-top: -5px;
+  }
+}

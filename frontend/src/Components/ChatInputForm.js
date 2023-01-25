@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
-import SignUpHeading from "./SignUpHeading";
 
 const ChatInputForm = ({
   input,
@@ -40,8 +39,6 @@ const ChatInputForm = ({
 
   return (
     <div className="chat-input-box">
-      {!user && <SignUpHeading handleLogin={handleLogin} />}
-
       {/* Only show chat input if user is signed in */}
       {user && (
         <>

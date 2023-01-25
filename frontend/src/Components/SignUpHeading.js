@@ -1,10 +1,14 @@
+import { CircularProgress } from "@mui/material";
 import React from "react";
 import "./SignUpHeading.css";
 
-function SignUpHeading({ handleLogin }) {
+function SignUpHeading({ handleLogin, isLoggingIn }) {
   return (
-    <div className="sign-up-heading-container" onClick={handleLogin}>
-      <h4 className="sign-up-heading">Login to start using</h4>
+    <div className="sign-up-heading-container">
+      <h4 onClick={handleLogin} className="sign-up-heading">
+        Login
+      </h4>
+      {isLoggingIn && <CircularProgress />}
     </div>
   );
 }

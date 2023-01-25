@@ -59,12 +59,6 @@ function DevLogsPage({ db }) {
           </li>
           <br />
           <li>
-            Prompt limit now set to 400 characters to reduce costs. Sorry for
-            the inconvenience, but it's necessary to keep the service free of
-            charge.
-          </li>
-          <br />
-          <li>
             AI responses have been enhanced with proper formatting, including
             new line breaks and appropriate spacing
           </li>

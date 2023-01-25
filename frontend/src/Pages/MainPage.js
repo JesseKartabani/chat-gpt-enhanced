@@ -14,18 +14,24 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { ref, push } from "firebase/database";
 import StoreButton from "../Components/StoreButton";
 import "./MainPage.css";
 import Disclaimer from "../Components/Disclaimer";
 import TemperatureSlider from "../Components/TemperatureSlider";
+import SignUpHeading from "../Components/SignUpHeading";
+import NotSubscribedHeading from "../Components/NotSubscribedHeading";
 
 function MainPage({ app, db }) {
   const provider = new GoogleAuthProvider(app);
   const auth = getAuth(app);
+  const firestoreDB = getFirestore(app);
 
   const [user, setUser] = useState(null);
   const [conversationId, setConversationId] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   function handleNewChat() {
     if (user) {
@@ -34,8 +40,8 @@ function MainPage({ app, db }) {
   }
 
   function handleLogin() {
+    setIsLoggingIn(true);
     signInWithRedirect(auth, provider);
-
     getRedirectResult(auth)
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access Google APIs.
@@ -68,8 +74,10 @@ function MainPage({ app, db }) {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
+      setAuthLoading(false);
       setUser(user);
       setConversationId(user.uid + Date.now());
+      loadSubscription();
     });
   }, []);
 
@@ -140,6 +148,24 @@ function MainPage({ app, db }) {
     setIsLoading(false);
   }
 
+  // Get users subscription data
+  const [subscription, setSubscription] = useState(null);
+
+  const loadSubscription = async () => {
+    const sub = auth.currentUser;
+    const ref = await getDocs(
+      collection(firestoreDB, `customers/${sub.uid}/subscriptions`)
+    );
+
+    ref.forEach(async (doc) => {
+      setSubscription({
+        role: doc.data().role,
+        current_period_end: doc.data().current_period_end,
+        current_period_start: doc.data().current_period_start,
+      });
+    });
+  };
+
   return (
     <div className="App">
       <aside className="side-menu">
@@ -202,16 +228,26 @@ function MainPage({ app, db }) {
           </div>
         )}
 
-        <TemperatureSlider setTemperature={setTemperature} user={user} />
+        {subscription?.role === "premium" && (
+          <TemperatureSlider setTemperature={setTemperature} user={user} />
+        )}
 
-        <ChatInputForm
-          input={input}
-          setInput={setInput}
-          handleSubmit={handleSubmit}
-          isLoading={isLoading}
-          user={user}
-          handleLogin={handleLogin}
-        />
+        {!user && !authLoading && (
+          <SignUpHeading handleLogin={handleLogin} isLoggingIn={isLoggingIn} />
+        )}
+        {subscription?.role !== "premium" && user && <NotSubscribedHeading />}
+
+        {authLoading && <CircularProgress />}
+        {subscription?.role === "premium" && (
+          <ChatInputForm
+            input={input}
+            setInput={setInput}
+            handleSubmit={handleSubmit}
+            isLoading={isLoading}
+            user={user}
+            handleLogin={handleLogin}
+          />
+        )}
 
         <Disclaimer />
       </section>

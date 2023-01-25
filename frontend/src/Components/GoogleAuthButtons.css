@@ -18,7 +18,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 50px;
+  margin-bottom: 10px;
 }
 
 .google-button:hover {
@@ -36,5 +37,6 @@
     bottom: 20px;
     left: 40px;
     margin-top: 0px;
+    margin-bottom: 0px;
   }
 }

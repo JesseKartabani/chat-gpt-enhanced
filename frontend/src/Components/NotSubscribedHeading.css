@@ -1,31 +1,28 @@
-.sign-up-heading {
+.not-subscribed-heading {
   font-size: 1.4em;
   transition: all 0.2s ease-in-out;
 }
 
-.sign-up-heading-container {
-  display: none;
+.not-subscribed-heading-container {
+  display: flex;
   align-items: center;
   justify-content: center;
+  color: white;
+  text-decoration: none;
 }
 
-.sign-up-heading:hover {
+.not-subscribed-heading:hover {
   cursor: pointer;
   scale: 1.06;
   text-decoration: underline;
 }
 
-.sign-up-heading:active {
+.not-subscribed-heading:active {
   opacity: 0.2;
 }
 
 @media (min-width: 1024px) {
-  .sign-up-heading {
+  .not-subscribed-heading {
     font-size: 2em;
-  }
-
-  .sign-up-heading-container {
-    display: flex;
-    flex-direction: column;
   }
 }

@@ -12,15 +12,18 @@
   color: white;
   margin-top: 40px;
   transition: all 0.1s ease-in-out;
-  background-color: #373943;
-  border: 1px solid gray;
+  background: linear-gradient(265.27deg, #0000 20.55%, #3f8cff 94.17%);
+  background-color: #3f8cff;
+  border: 1px solid #3f8cff;
   border-radius: 10px;
   padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .store-link:hover {
   scale: 1.04;
-  border-color: #8bb2ff;
+  background-color: #7fa9ee;
 }
 
 .store-link:active {
@@ -37,14 +40,13 @@
 @media (min-width: 1024px) {
   .store-link {
     margin-top: 20px;
-    background-color: #202123;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 65px;
+    padding-right: 65px;
   }
 
   .store-button-container {
     position: fixed;
     bottom: 100px;
-    left: 50px;
+    left: 42px;
   }
 }

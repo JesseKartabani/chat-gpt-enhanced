@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import MainPage from "./Pages/MainPage";
 import DevLogsPage from "./Pages/DevLogsPage";
 import Error404Page from "./Pages/Error404Page";
+import StorePage from "./Pages/StorePage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBGRLU71c5pzN5WNY5IZtjEuFIZsGdcEjY",
@@ -27,6 +28,8 @@ function App() {
       <Route path="/" element={<MainPage app={app} db={db} />} />
 
       <Route path="/developer-logs" element={<DevLogsPage db={db} />} />
+
+      <Route path="/store" element={<StorePage app={app} />} />
 
       <Route path="*" element={<Error404Page />} />
     </Routes>
