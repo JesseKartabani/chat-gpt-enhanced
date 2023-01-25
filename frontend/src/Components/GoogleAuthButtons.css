@@ -10,8 +10,11 @@
   width: 200px;
   background: linear-gradient(265.27deg, #0000 20.55%, #414350 94.17%);
   background-color: #414350;
-  transition: all 0.2s ease-in;
+  transition: all 0.1s ease-in-out;
   color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
 }
 
 .google-button-container {
@@ -25,6 +28,7 @@
 .google-button:hover {
   background-color: #8bb2ff;
   border-color: black;
+  scale: 1.04;
 }
 
 .google-button:active {
@@ -38,5 +42,9 @@
     left: 40px;
     margin-top: 0px;
     margin-bottom: 0px;
+  }
+
+  .google-button {
+    font-size: 16px;
   }
 }

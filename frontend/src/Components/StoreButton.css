@@ -42,11 +42,12 @@
     margin-top: 20px;
     padding-left: 65px;
     padding-right: 65px;
+    font-size: 16px;
   }
 
   .store-button-container {
     position: fixed;
     bottom: 100px;
-    left: 42px;
+    left: 40px;
   }
 }
