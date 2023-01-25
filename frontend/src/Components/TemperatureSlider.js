@@ -18,7 +18,7 @@ function TemperatureSlider({ setTemperature, user }) {
             value={value}
             onChange={handleChange}
             sx={{
-              color: "#8bb2ff",
+              color: "#b3befe",
             }}
           />
           <div className="temperature-headings">

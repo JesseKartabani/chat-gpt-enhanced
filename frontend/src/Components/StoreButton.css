@@ -10,11 +10,12 @@
   justify-content: center;
   text-decoration: none;
   color: white;
+  font-weight: 600;
   margin-top: 40px;
-  transition: all 0.1s ease-in-out;
-  background: linear-gradient(265.27deg, #0000 20.55%, #3f8cff 94.17%);
-  background-color: #3f8cff;
-  border: 1px solid #3f8cff;
+  transition: all 150ms ease-in-out;
+  background: linear-gradient(265.27deg, #0000 20.55%, #b3befe 94.17%);
+  background-color: #7966f6;
+  border: 1px solid #7966f6;
   border-radius: 10px;
   padding: 5px;
   padding-left: 15px;
@@ -23,7 +24,7 @@
 
 .store-link:hover {
   scale: 1.04;
-  background-color: #7fa9ee;
+  background-color: #9f4cff;
 }
 
 .store-link:active {

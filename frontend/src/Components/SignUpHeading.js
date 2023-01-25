@@ -8,7 +8,7 @@ function SignUpHeading({ handleLogin, isLoggingIn }) {
       <h4 onClick={handleLogin} className="sign-up-heading">
         Login
       </h4>
-      {isLoggingIn && <CircularProgress />}
+      {isLoggingIn && <CircularProgress style={{ color: "#b3befe" }} />}
     </div>
   );
 }

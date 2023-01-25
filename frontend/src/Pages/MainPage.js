@@ -212,7 +212,7 @@ function MainPage({ app, db }) {
           ))}
           {isLoading === true && (
             <div className="circular-progress">
-              <CircularProgress />
+              <CircularProgress style={{ color: "#b3befe" }} />
             </div>
           )}
         </div>
@@ -237,7 +237,7 @@ function MainPage({ app, db }) {
         )}
         {subscription?.role !== "premium" && user && <NotSubscribedHeading />}
 
-        {authLoading && <CircularProgress />}
+        {authLoading && <CircularProgress style={{ color: "#b3befe" }} />}
         {subscription?.role === "premium" && (
           <ChatInputForm
             input={input}
