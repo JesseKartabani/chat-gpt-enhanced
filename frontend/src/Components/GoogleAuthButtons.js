@@ -13,7 +13,7 @@ function GoogleAuthButtons({ user, handleLogin, handleLogout }) {
       ) : (
         <button className="google-button" onClick={handleLogin}>
           <GoogleSvg />
-          Login with Google
+          Login
         </button>
       )}
     </div>
