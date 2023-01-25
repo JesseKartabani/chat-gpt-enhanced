@@ -8,7 +8,7 @@ function Hero() {
       <h1 className="hero-heading">ChatGPT Enhanced</h1>
 
       <div className="info-container">
-        <div className="info-sub-container">
+        <div className="info-sub-container side-container">
           <div className="info-heading">
             <svg
               className="hero-svg"
@@ -59,10 +59,15 @@ function Hero() {
             info={"Remembers what user said earlier in the conversation"}
           />
           <HeroInfo info={"Allows user to provide follow-up corrections"} />
-          <HeroInfo info={"Trained to decline inappropriate requests"} />
+          <HeroInfo info={"Speech-to-text capabilities"} />
+          <HeroInfo
+            info={
+              "Control over the balance of logical and creative thinking in the AI"
+            }
+          />
         </div>
 
-        <div className="info-sub-container">
+        <div className="info-sub-container side-container">
           <div className="info-heading">
             <svg
               className="hero-svg"
