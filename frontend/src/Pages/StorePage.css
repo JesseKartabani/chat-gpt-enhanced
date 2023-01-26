@@ -129,9 +129,18 @@
   margin-left: 5px;
 }
 
+.old-price {
+  text-decoration: line-through;
+  color: #a5a7ab;
+}
+
 @media (min-width: 1024px) {
   .home-button {
     margin-top: 80px;
+  }
+
+  .old-price {
+    font-size: 1.3em;
   }
 
   .sub-card {
@@ -176,7 +185,7 @@
   }
 
   .price {
-    font-size: 2em;
+    font-size: 2.3em;
   }
 
   .feature {

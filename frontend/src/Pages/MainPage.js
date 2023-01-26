@@ -162,6 +162,7 @@ function MainPage({ app, db }) {
         role: doc.data().role,
         current_period_end: doc.data().current_period_end,
         current_period_start: doc.data().current_period_start,
+        ended_at: doc.data().ended_at,
       });
     });
   };
@@ -238,7 +239,7 @@ function MainPage({ app, db }) {
         {subscription?.role !== "premium" && user && <NotSubscribedHeading />}
 
         {authLoading && <CircularProgress style={{ color: "#b3befe" }} />}
-        {subscription?.role === "premium" && (
+        {subscription?.role === "premium" && !subscription?.ended_at && (
           <ChatInputForm
             input={input}
             setInput={setInput}

@@ -44,7 +44,7 @@ function StorePage({ app }) {
     const docRef = await addDoc(
       collection(db, `customers/${user.uid}/checkout_sessions`),
       {
-        price: "price_1MSCnSG3QzTgLSVlR4KN8wdS",
+        price: "price_1MUNd2G3QzTgLSVlIsOgsP1w",
         success_url: window.location.origin,
         cancel_url: window.location.origin,
       }
@@ -93,8 +93,9 @@ function StorePage({ app }) {
         </div>
 
         <div className="pricing">
+          <div className="old-price">$14.99</div>
           <div className="price">
-            $14.99<span className="currency-type">USD</span>
+            $9.99<span className="currency-type">USD</span>
           </div>
           <div className="text-gray">Per Month</div>
         </div>
