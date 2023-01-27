@@ -36,7 +36,7 @@ const ChatMessage = ({ message, isLastMessage }) => {
   }, [text]);
 
   function copyText() {
-    navigator.clipboard.writeText(messagesEndRef.current.textContent).then(
+    navigator.clipboard.writeText(text.trimStart()).then(
       () => {
         setButtonText("Copied");
       },
