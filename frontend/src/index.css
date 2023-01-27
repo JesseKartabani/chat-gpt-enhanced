@@ -22,7 +22,7 @@ code {
 
 ::-webkit-scrollbar {
   background-color: #343541;
-  width: 0.4em;
+  width: 0.7em;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -33,6 +33,6 @@ code {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.7);
+  background: #b3befe;
   background-clip: content-box;
 }

@@ -38,19 +38,18 @@
   left: 70%;
   transform: translateX(-50%);
   transform: rotate(90deg);
+  transition: all 150ms ease-in-out;
 }
 
 .submit-button:hover {
   background-color: #202123;
-  border: 1px solid gray;
-  transition: all 0.2s ease-in;
+  border: 1px solid #202123;
 }
 
 .submit-button:disabled {
   background-color: #40414f;
   border: 1px solid #40414f;
   opacity: 0.1;
-  transition: all 0.2s ease-in-out;
 }
 
 .mic-button {
@@ -60,15 +59,15 @@
   background-color: #373942;
   position: absolute;
   bottom: 40px;
-  left: 12%;
+  left: 10%;
   transform: translateX(-50%);
-  padding: 6px;
+  padding: 4px;
 }
 
 .mic-button:hover {
   background-color: #202123;
-  border: 1px solid gray;
-  transition: all 0.2s ease-in;
+  border: 1px solid #202123;
+  transition: all 150ms ease-in;
 }
 
 .not-listening {
@@ -99,7 +98,7 @@
 
   .mic-button {
     bottom: 85px;
-    left: 18%;
+    left: 17%;
   }
 
   .submit-svg {

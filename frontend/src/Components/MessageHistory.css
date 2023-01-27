@@ -39,3 +39,21 @@
   max-height: 16px;
   max-width: 16px;
 }
+
+.message-history-container::-webkit-scrollbar {
+  display: none;
+  background-color: #202123;
+  width: 0.6em;
+}
+
+.message-history-container::-webkit-scrollbar-thumb {
+  background: #b3befe;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background-clip: content-box;
+  height: 40px;
+}
+
+.message-history-container:hover::-webkit-scrollbar {
+  display: flex;
+}
