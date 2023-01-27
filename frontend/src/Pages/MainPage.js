@@ -165,6 +165,7 @@ function MainPage({ app, db }) {
           clearChat={clearChat}
           clearInput={clearInput}
           handleNewChat={handleNewChat}
+          isLoading={isLoading}
         />
         {user && (
           <MessageHistory
@@ -185,7 +186,11 @@ function MainPage({ app, db }) {
 
       <section className="chat-box">
         <div className="mobile-new-chat-button">
-          <NewChatButton clearChat={clearChat} clearInput={clearInput} />
+          <NewChatButton
+            clearChat={clearChat}
+            clearInput={clearInput}
+            isLoading={isLoading}
+          />
         </div>
 
         {chatLog.length === 0 && <Hero />}
