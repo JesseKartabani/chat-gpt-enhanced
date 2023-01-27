@@ -66,6 +66,8 @@ function MainPage({ app, db }) {
     signOut(auth)
       .then(() => {
         console.log("Logged out");
+        clearInput();
+        clearChat();
       })
       .catch((error) => {
         console.log(error);
