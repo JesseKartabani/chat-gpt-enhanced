@@ -106,7 +106,9 @@ function MainPage({ app, db }) {
     setChatLog(chatLogNew);
     setIsLoading(true);
 
-    const messages = chatLogNew.map((message) => message.message).join("\n");
+    // Give the AI the last 5 messages for context as well as the recent input
+    const lastSix = chatLogNew.slice(Math.max(chatLogNew.length - 6, 0));
+    const messages = lastSix.map((message) => message.message).join("\n");
 
     const response = await fetch(
       "https://chat-gpt-enhanced-backend.herokuapp.com",
