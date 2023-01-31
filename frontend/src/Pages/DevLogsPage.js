@@ -9,6 +9,7 @@ function DevLogsPage({ db }) {
     <div className="dev-log-container">
       <h1>Developer Logs</h1>
 
+      {/* Return home */}
       <Link className="return-link" to={"/"}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -22,11 +23,13 @@ function DevLogsPage({ db }) {
         <b>Return to Home</b>
       </Link>
 
+      {/* Report bugs and request features */}
       <div className="modals">
         <BugReportModal db={db} />
         <FeatureRequestModal db={db} />
       </div>
 
+      {/* Upcoming Updates */}
       <div className="recent-updates-container">
         <h2>Upcoming Updates</h2>
         <p>
@@ -35,6 +38,7 @@ function DevLogsPage({ db }) {
             effort to implement new features in a timely manner
           </b>
         </p>
+
         <ul className="list">
           <li>
             Finishing the message history so you can load your old messages
@@ -44,10 +48,12 @@ function DevLogsPage({ db }) {
         </ul>
       </div>
 
+      {/* Recent Updates */}
       <div className="recent-updates-container">
         <h2>Recent Updates </h2>
         <ul className="list">
           <h3>(Jan 18/19)</h3>
+
           <li>
             Adjust the balance of logical and creative thinking for the AI to
             best suit your needs with the new slider above your prompt
@@ -65,6 +71,7 @@ function DevLogsPage({ db }) {
         </ul>
       </div>
 
+      {/* Other Projects */}
       <div className="other-projects-container">
         <h2>Other AI Projects By Me</h2>
         <a

@@ -1,5 +1,6 @@
 import React from "react";
 
+// Googles logo as an svg
 const GoogleSvg = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"

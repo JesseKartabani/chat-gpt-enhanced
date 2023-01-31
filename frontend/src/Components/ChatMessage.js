@@ -4,37 +4,20 @@ import { motion } from "framer-motion";
 import { Cursor, useTypewriter } from "react-simple-typewriter";
 
 const ChatMessage = ({ message, isLastMessage }) => {
+  // Reference to messagesEnd component for scrolling to bottom
   const messagesEndRef = useRef(null);
+
   const [copyButtonVisible, setCopyButtonVisible] = useState(false);
   const [cursorVisible, setCursorVisible] = useState("|");
   const [buttonText, setButtonText] = useState("Copy");
 
+  // Use typewriter hook to type out ai message
   const [text] = useTypewriter({
     words: [message.message],
     typeSpeed: 15,
   });
 
-  useEffect(() => {
-    if (text.length === message.message.length) {
-      // Typewriter is done, hide the cursor
-      setCursorVisible("");
-      setCopyButtonVisible(true);
-    } else {
-      // Typewriter is still typing, show the cursor
-      setCursorVisible("|");
-      setCopyButtonVisible(false);
-    }
-  }, [message.message.length, text.length]);
-
-  // auto scroll
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [text]);
-
+  // Copy ai message to clipboard
   function copyText() {
     navigator.clipboard.writeText(text.trimStart()).then(
       () => {
@@ -45,6 +28,28 @@ const ChatMessage = ({ message, isLastMessage }) => {
       }
     );
   }
+
+  // Scrolls to the bottom of the screen
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    if (text.length === message.message.length) {
+      // Typewriter is done, hide the cursor and show copy button
+      setCursorVisible("");
+      setCopyButtonVisible(true);
+    } else {
+      // Typewriter is still typing, show the cursor and hide copy button
+      setCursorVisible("|");
+      setCopyButtonVisible(false);
+    }
+  }, [message.message.length, text.length]);
+
+  // Scroll to bottom of screen when a new ai message is added
+  useEffect(() => {
+    scrollToBottom();
+  }, [text]);
 
   return (
     <motion.div
@@ -84,10 +89,13 @@ const ChatMessage = ({ message, isLastMessage }) => {
         </div>
 
         {/* Messages */}
+
+        {/* User message */}
         {message.user === "me" && (
           <div className="message">{message.message.split("\n")}</div>
         )}
 
+        {/* AI message */}
         {message.user === "gpt" && (
           <div
             ref={messagesEndRef}
@@ -97,13 +105,14 @@ const ChatMessage = ({ message, isLastMessage }) => {
             {/* Typewriter text followed by cursor */}
             {text.trimStart()}
             <Cursor cursorColor="white" cursorStyle={cursorVisible} />
-            {/* Copy to clipboard button if its the last message */}
+            {/* Display copy to clipboard button if last message */}
             {isLastMessage && copyButtonVisible && text !== "" ? (
               <button
                 className="copy-text-button"
                 onClick={copyText}
                 data-testid="copy"
               >
+                {/* Copy svg */}
                 <svg
                   stroke="currentColor"
                   fill="none"

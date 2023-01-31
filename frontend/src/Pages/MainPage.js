@@ -32,6 +32,7 @@ function MainPage({ app, db }) {
   const [conversationId, setConversationId] = useState(null);
   const [authLoading, setAuthLoading] = useState(true);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
+  const [subscription, setSubscription] = useState(null);
 
   function handleNewChat() {
     if (user) {
@@ -39,6 +40,7 @@ function MainPage({ app, db }) {
     }
   }
 
+  // Redirect user to google login
   function handleLogin() {
     setIsLoggingIn(true);
     signInWithRedirect(auth, provider);
@@ -51,6 +53,7 @@ function MainPage({ app, db }) {
       });
   }
 
+  // Log user out, clear old messages and input
   function handleLogout() {
     signOut(auth)
       .then(() => {
@@ -64,18 +67,23 @@ function MainPage({ app, db }) {
   }
 
   useEffect(() => {
+    // When the authentication state changes (user logging in/out)
     onAuthStateChanged(auth, (user) => {
       setAuthLoading(false);
+      // update user
       setUser(user);
+      // Give new conversation id
       setConversationId(user.uid + Date.now());
+      // load users sub data
       loadSubscription();
     });
   }, []);
 
   const [input, setInput] = useState("");
   const [chatLog, setChatLog] = useState([]);
-  const [temperature, setTemperature] = useState(0.5);
   const [isLoading, setIsLoading] = useState(null);
+  // Default temperature is 0.5 (must match temperature sliders default value/100)
+  const [temperature, setTemperature] = useState(0.5);
 
   function clearChat() {
     setChatLog([]);
@@ -87,29 +95,35 @@ function MainPage({ app, db }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    // Create reference to the user's chat log in the database
     const chatRef = ref(db, `messages/${user.uid}/${conversationId}`);
+    // Add user's input to the chat log
     let chatLogNew = [...chatLog, { user: "me", message: `${input}` }];
 
+    // Check if the user is logged in
     if (user) {
+      // Push the user's input to the database
       push(chatRef, {
         user: "me",
         message: input,
         timestamp: Date.now(),
       })
         .then(() => {})
+        // Log the error if the write failed
         .catch((error) => {
           console.log("The write failed...", error);
         });
     }
 
-    clearInput();
-    setChatLog(chatLogNew);
+    clearInput(); // Clear the input field
+    setChatLog(chatLogNew); // Set the new chat log with user's input
     setIsLoading(true);
 
     // Give the AI the last 5 messages for context as well as the recent input
     const lastSix = chatLogNew.slice(Math.max(chatLogNew.length - 6, 0));
     const messages = lastSix.map((message) => message.message).join("\n");
 
+    // Fetch response from the backend
     const response = await fetch(
       "https://chat-gpt-enhanced-backend.herokuapp.com",
       {
@@ -117,6 +131,8 @@ function MainPage({ app, db }) {
         headers: {
           "Content-Type": "application/json",
         },
+        // Post the last 6 messages (including the ai responses)
+        // and the temperature for the current prompt
         body: JSON.stringify({
           message: messages,
           temperature: temperature,
@@ -124,8 +140,10 @@ function MainPage({ app, db }) {
       }
     );
 
+    // Get the response data in JSON format
     const data = await response.json();
     if (user) {
+      // Push the AI response to the database
       push(chatRef, {
         user: "gpt",
         message: data.message,
@@ -137,19 +155,21 @@ function MainPage({ app, db }) {
         });
     }
 
+    // Set the chat log with the AI response
     setChatLog([...chatLogNew, { user: "gpt", message: `${data.message}` }]);
     setIsLoading(false);
   }
 
   // Get users subscription data
-  const [subscription, setSubscription] = useState(null);
-
   const loadSubscription = async () => {
+    // Get the current user
     const sub = auth.currentUser;
+    // Get the reference to the user's subscriptions
     const ref = await getDocs(
       collection(firestoreDB, `customers/${sub.uid}/subscriptions`)
     );
 
+    // Set subscription details in state
     ref.forEach(async (doc) => {
       setSubscription({
         role: doc.data().role,
@@ -162,6 +182,7 @@ function MainPage({ app, db }) {
 
   return (
     <div className="App">
+      {/* Side menu (not visible on mobile) */}
       <aside className="side-menu">
         <NewChatButton
           clearChat={clearChat}
@@ -169,6 +190,7 @@ function MainPage({ app, db }) {
           handleNewChat={handleNewChat}
           isLoading={isLoading}
         />
+        {/* Display message history if user is logged in */}
         {user && (
           <MessageHistory
             userId={user.uid}
@@ -177,8 +199,10 @@ function MainPage({ app, db }) {
           />
         )}
 
-        <StoreButton user={user} app={app} />
+        {/* Takes user to the store, only displayed if user is logged in */}
+        <StoreButton user={user} />
 
+        {/* Login/logout buttons */}
         <GoogleAuthButtons
           user={user}
           handleLogin={handleLogin}
@@ -186,7 +210,9 @@ function MainPage({ app, db }) {
         />
       </aside>
 
+      {/* Chat box */}
       <section className="chat-box">
+        {/* New chat button for mobile only */}
         <div className="mobile-new-chat-button">
           <NewChatButton
             clearChat={clearChat}
@@ -195,12 +221,15 @@ function MainPage({ app, db }) {
           />
         </div>
 
+        {/* Only display hero if theres no chats */}
         {chatLog.length === 0 && <Hero />}
 
+        {/* Store button for mobile only */}
         <div className="mobile-store-button">
           {chatLog.length === 0 && <StoreButton user={user} />}
         </div>
 
+        {/* Chat log (the actual messages) */}
         <div className="chat-log">
           {chatLog.map((message, index) => (
             <ChatMessage
@@ -216,7 +245,11 @@ function MainPage({ app, db }) {
           )}
         </div>
 
-        {/* Login button for mobile */}
+        {/* 
+          Login button for mobile only 
+          Right now its set up to only display the login button need to rework
+          the ui for mobile 
+        */}
         {!user && (
           <div className="mobile-login-button">
             <GoogleAuthButtons
@@ -227,16 +260,23 @@ function MainPage({ app, db }) {
           </div>
         )}
 
+        {/* If user is subscribed display temperature slider */}
         {subscription?.role === "premium" && (
           <TemperatureSlider setTemperature={setTemperature} user={user} />
         )}
 
+        {/* If the user is not signed in display sign up heading */}
         {!user && !authLoading && (
           <SignUpHeading handleLogin={handleLogin} isLoggingIn={isLoggingIn} />
         )}
+
+        {/* If the user isn't subscribed display the visit store heading */}
         {subscription?.role !== "premium" && user && <NotSubscribedHeading />}
 
+        {/* Loading spinner when user is logging in */}
         {authLoading && <CircularProgress style={{ color: "#b3befe" }} />}
+
+        {/* If the user is subscribed display the chat input form */}
         {subscription?.role === "premium" && !subscription?.ended_at && (
           <ChatInputForm
             input={input}

@@ -17,6 +17,8 @@ function Error404Page() {
           </span>
         </h1>
         <h3 className="second-heading fadeIn">PAGE NOT FOUND</h3>
+
+        {/* Link back to site */}
         <a href="https://chat-gpt-enhanced.web.app/">
           <button type="button" name="button" className="return-button">
             Return To Home

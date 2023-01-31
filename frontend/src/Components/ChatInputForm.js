@@ -4,18 +4,13 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 
-const ChatInputForm = ({
-  input,
-  setInput,
-  handleSubmit,
-  isLoading,
-  user,
-  handleLogin,
-}) => {
+const ChatInputForm = ({ input, setInput, handleSubmit, isLoading, user }) => {
+  // Hook to get transcript (the speech-to-text)
   const { transcript } = useSpeechRecognition();
   const [lastTranscript, setLastTranscript] = useState(transcript);
   const [isListening, setIsListening] = useState(false);
 
+  // Turns microphone on and off
   function handleToggleListening() {
     if (isListening) {
       SpeechRecognition.stopListening();
@@ -26,9 +21,9 @@ const ChatInputForm = ({
     }
   }
 
+  // Add transcript to input field when transcript changes
   useEffect(() => {
     setTimeout(() => {
-      //Clean up the transcript and add it to input
       const cleanedTranscript = transcript.trim().replace(/\s+/g, " ");
       if (cleanedTranscript !== lastTranscript) {
         setInput(input + cleanedTranscript.slice(lastTranscript.length));
@@ -42,6 +37,7 @@ const ChatInputForm = ({
       {/* Only show chat input if user is signed in */}
       {user && (
         <>
+          {/* Microphone on/off button */}
           <button
             className={`mic-button ${isListening && "listening"} ${
               isListening === false && "not-listening"
@@ -49,6 +45,7 @@ const ChatInputForm = ({
             onClick={handleToggleListening}
             aria-label="toggle microphone"
           >
+            {/* Microphone svg */}
             <svg
               stroke="currentColor"
               fill="currentColor"
@@ -66,6 +63,7 @@ const ChatInputForm = ({
             </svg>
           </button>
 
+          {/* Input form */}
           <form data-testid="chat-input-form" onSubmit={handleSubmit}>
             <textarea
               maxLength="1000" // Adjust this as needed
@@ -73,7 +71,6 @@ const ChatInputForm = ({
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
                   e.preventDefault();
-
                   if (e.target.value.trim() === "") return;
                   if (isLoading) return;
                   handleSubmit(e);
@@ -85,12 +82,15 @@ const ChatInputForm = ({
               onChange={(e) => setInput(e.target.value)}
               placeholder="Prompt"
             ></textarea>
+
+            {/* Submit button */}
             <button
               data-testid="submit-button"
               className="submit-button"
               disabled={isLoading}
               aria-label="submit"
             >
+              {/* Submit svg */}
               <svg
                 stroke="currentColor"
                 fill="currentColor"

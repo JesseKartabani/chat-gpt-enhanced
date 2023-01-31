@@ -19,6 +19,7 @@ function FeatureRequestModal({ db }) {
   const [show, setShow] = useState(false);
   const [input, setInput] = useState("");
 
+  // Create the backdrop component for the modal
   const renderBackdrop = (props) => <Backdrop {...props} />;
 
   const chatRef = ref(db, "features");
@@ -26,6 +27,7 @@ function FeatureRequestModal({ db }) {
   function handleSubmit() {
     console.log(`${input}`);
 
+    // Push the feature to database with a timestamp
     push(chatRef, {
       feature: input,
       timestamp: Date.now(),
@@ -41,6 +43,7 @@ function FeatureRequestModal({ db }) {
 
   return (
     <div className="modal-example">
+      {/* Open modal button */}
       <button
         type="button"
         className="open-modal-button"
@@ -49,6 +52,7 @@ function FeatureRequestModal({ db }) {
         Request Feature
       </button>
 
+      {/* The Modal component */}
       <Modal
         show={show}
         onHide={() => setShow(false)}
@@ -57,16 +61,20 @@ function FeatureRequestModal({ db }) {
         className="modal"
       >
         <div className="modal-inner-container">
+          {/* Modal label */}
           <h3 id="modal-label">Request Feature</h3>
+          {/* Introduction to feature request */}
           <p>
             If you have any feature requests or ideas for improvement, please
             let me know by filling out this form.
           </p>
 
+          {/* Tips for submitting a feature request */}
           <ul>
             <li>Be as specific as possible.</li>
           </ul>
 
+          {/* The feature request form */}
           <form onSubmit={handleSubmit} className="feature-form">
             <textarea
               className="feature-form-textarea"

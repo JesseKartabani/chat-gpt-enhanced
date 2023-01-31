@@ -19,13 +19,15 @@ function BugReportModal({ db }) {
   const [show, setShow] = useState(false);
   const [input, setInput] = useState("");
 
+  // Create the backdrop component for the modal
   const renderBackdrop = (props) => <Backdrop {...props} />;
 
+  // Connect to the firebase database
   const chatRef = ref(db, "bugs");
 
   function handleSubmit() {
     console.log(`${input}`);
-
+    // Push the bug to database with a timestamp
     push(chatRef, {
       bug: input,
       timestamp: Date.now(),
@@ -41,6 +43,7 @@ function BugReportModal({ db }) {
 
   return (
     <div className="modal-example">
+      {/* Open modal button */}
       <button
         type="button"
         className="open-modal-button"
@@ -49,6 +52,7 @@ function BugReportModal({ db }) {
         Report Bugs
       </button>
 
+      {/* The Modal component */}
       <Modal
         show={show}
         onHide={() => setShow(false)}
@@ -57,13 +61,16 @@ function BugReportModal({ db }) {
         className="modal"
       >
         <div className="modal-inner-container">
+          {/* Modal label */}
           <h3 id="modal-label">Submit Bug</h3>
+          {/* Introduction to bug report */}
           <p>
             If you have stumbled onto a bug, I will need as much detail as
             possible to find and fix it. Using the field below, please describe
             the issue:
           </p>
 
+          {/* Tips for submitting a bug report */}
           <ul>
             <li>
               <b>Be specific</b> about every step that leads to the problem.
@@ -78,6 +85,7 @@ function BugReportModal({ db }) {
             </li>
           </ul>
 
+          {/* The bug report form */}
           <form onSubmit={handleSubmit} className="bug-form">
             <textarea
               className="bug-form-textarea"

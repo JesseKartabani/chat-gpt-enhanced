@@ -1,5 +1,6 @@
 import React from "react";
 
+// Used in store page
 const CheckSvg = () => (
   <svg
     style={{

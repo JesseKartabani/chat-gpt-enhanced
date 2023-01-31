@@ -8,6 +8,7 @@ function Disclaimer() {
       <p className="disclaimer-text">
         Not affiliated with or endorsed by OpenAI
       </p>
+
       <Link className="dev-log-link" to={"/developer-logs"}>
         Development Progress, Bug Reports, and Feature Requests
       </Link>

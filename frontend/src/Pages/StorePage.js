@@ -15,32 +15,39 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 function StorePage({ app }) {
+  // Get firestore and auth instances
   const db = getFirestore(app);
   const auth = getAuth();
+  // Get current user
   const user = auth.currentUser;
   const [loading, setLoading] = useState(false);
   const [subscription, setSubscription] = useState(null);
 
+  // Load user's subscription details
   const loadSubscription = async () => {
     const ref = await getDocs(
       collection(db, `customers/${user.uid}/subscriptions`)
     );
-
+    // Set subscription details in state
     ref.forEach(async (doc) => {
       setSubscription({
         role: doc.data().role,
         current_period_end: doc.data().current_period_end,
         current_period_start: doc.data().current_period_start,
+        ended_at: doc.data().ended_at,
       });
     });
   };
 
+  // Load subscription details when component loads
   useEffect(() => {
     loadSubscription();
   }, []);
 
+  // Load checkout session
   const loadCheckout = async () => {
     setLoading(true);
+    // Add checkout session to the firestore
     const docRef = await addDoc(
       collection(db, `customers/${user.uid}/checkout_sessions`),
       {
@@ -49,16 +56,15 @@ function StorePage({ app }) {
         cancel_url: window.location.origin,
       }
     );
-
+    // Listen for changes in checkout session
     onSnapshot(docRef, async (snap) => {
       const { error, sessionId } = snap.data();
+      // If there's an error, show an alert
       if (error) {
-        // Show an error to your customer and
-        // inspect your Cloud Function logs in the Firebase console.
         alert(`An error occured: ${error.message}`);
       }
+      // If sessionId is available, redirect to checkout
       if (sessionId) {
-        // We have a Stripe Checkout URL, let's redirect.
         const stripe = await loadStripe(
           "pk_live_51MQJzsG3QzTgLSVlbbn61XR2oHPXoFBdUFzS2TpLtmAYpkad8VS9zNggzcxFP38emnL4YsHItBaLXHCrBugX5LZY005GSqsQAv"
         );
@@ -119,6 +125,7 @@ function StorePage({ app }) {
           </div>
         </div>
 
+        {/* If a user is not subscribed, show the checkout button */}
         {subscription?.role !== "premium" && (
           <>
             <button className="sub-button" onClick={() => loadCheckout()}>
@@ -137,6 +144,7 @@ function StorePage({ app }) {
           </>
         )}
 
+        {/* If a user is subscribed, show the unsubscribe button */}
         {subscription?.role === "premium" && (
           <a
             className="sub-button"
@@ -148,6 +156,7 @@ function StorePage({ app }) {
       </motion.div>
 
       <Link className="home-button" to={"/"}>
+        {/* Left arrow svg */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width={16}
