@@ -25,6 +25,7 @@
 .mobile-new-chat-button {
   position: sticky;
   top: 0px;
+  z-index: 100;
 }
 
 @media (min-width: 1024px) {
