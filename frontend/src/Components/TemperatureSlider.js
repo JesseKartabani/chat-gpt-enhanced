@@ -12,7 +12,7 @@ function TemperatureSlider({ setTemperature, user }) {
     setValue(newValue);
     // Set temperature by dividing our value by 100 because the temperature
     // prop is from 0-1 not 0-100 like our value for displaying the slider
-    setTemperature(value / 100);
+    setTemperature(newValue / 100);
   };
   return (
     <div className="temperature-container">
