@@ -1,6 +1,7 @@
 import React from "react";
 import "./Hero.css";
 import HeroInfo from "./HeroInfo";
+import { motion } from "framer-motion";
 
 function Hero() {
   return (
@@ -10,7 +11,13 @@ function Hero() {
 
       <div className="info-container">
         {/* Section for Examples */}
-        <div className="info-sub-container side-container">
+        <motion.div
+          // fade in from top
+          initial={{ opacity: 0.5, y: -40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="info-sub-container side-container"
+        >
           <div className="info-heading">
             {/* SVG icon for Examples */}
             <svg
@@ -39,7 +46,7 @@ function Hero() {
             info={"Got any creative ideas for a 10 year old’s birthday?"}
           />
           <HeroInfo info={"How do I make an HTTP request in Javascript?"} />
-        </div>
+        </motion.div>
 
         {/* Section for Capabilities */}
         <div className="info-sub-container">
@@ -81,7 +88,13 @@ function Hero() {
         </div>
 
         {/* Section for Limitations */}
-        <div className="info-sub-container side-container">
+        <motion.div
+          // fade in from top
+          initial={{ opacity: 0.5, y: -40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="info-sub-container side-container"
+        >
           <div className="info-heading">
             {/* SVG icon for Limitations */}
             <svg
@@ -111,7 +124,7 @@ function Hero() {
             }
           />
           <HeroInfo info={"Limited knowledge of world and events after 2021"} />
-        </div>
+        </motion.div>
       </div>
     </div>
   );

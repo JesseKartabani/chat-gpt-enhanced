@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
+import { motion } from "framer-motion";
 
 const ChatInputForm = ({ input, setInput, handleSubmit, isLoading, user }) => {
   // Hook to get transcript (the speech-to-text)
@@ -33,7 +34,13 @@ const ChatInputForm = ({ input, setInput, handleSubmit, isLoading, user }) => {
   }, [transcript, input, setInput, lastTranscript]);
 
   return (
-    <div className="chat-input-box">
+    <motion.div
+      // fades in
+      initial={{ opacity: 0.5 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className="chat-input-box"
+    >
       {/* Only show chat input if user is signed in */}
       {user && (
         <>
@@ -110,7 +117,7 @@ const ChatInputForm = ({ input, setInput, handleSubmit, isLoading, user }) => {
           </form>
         </>
       )}
-    </div>
+    </motion.div>
   );
 };
 

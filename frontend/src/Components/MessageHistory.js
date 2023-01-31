@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ref, get } from "firebase/database";
+import { motion } from "framer-motion";
 import "./MessageHistory.css";
 
 // TODO: Allow user to view full conversation when they click a message in history
@@ -57,7 +58,13 @@ function MessageHistory({ userId, db }) {
       {messageHistory.map((message, index) => (
         // Display the first message for each conversation
         <button className="message-button" key={index}>
-          <div className="message-container">
+          <motion.div
+            // fade messages in
+            initial={{ opacity: 0.5 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+            className="message-container"
+          >
             {/* Chat bubble svg */}
             <svg
               stroke="currentColor"
@@ -79,7 +86,7 @@ function MessageHistory({ userId, db }) {
                 message.message.charAt(0).toUpperCase() +
                   message.message.slice(1)}
             </p>
-          </div>
+          </motion.div>
         </button>
       ))}
     </div>
