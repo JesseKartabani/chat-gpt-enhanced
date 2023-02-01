@@ -19,8 +19,10 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const db = getDatabase(app);
+if (process.env.NODE_ENV !== "test") {
+  const analytics = getAnalytics(app);
+}
+export const db = getDatabase(app);
 
 function App() {
   return (
