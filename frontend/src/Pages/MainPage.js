@@ -15,13 +15,14 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
-import { ref, push } from "firebase/database";
+import { ref, push, get, set } from "firebase/database";
 import StoreButton from "../Components/StoreButton";
 import "./MainPage.css";
 import Disclaimer from "../Components/Disclaimer";
 import TemperatureSlider from "../Components/TemperatureSlider";
 import SignUpHeading from "../Components/SignUpHeading";
 import NotSubscribedHeading from "../Components/NotSubscribedHeading";
+import FreeTrial from "../Components/FreeTrial";
 
 function MainPage({ app, db }) {
   const provider = new GoogleAuthProvider(app);
@@ -33,6 +34,7 @@ function MainPage({ app, db }) {
   const [authLoading, setAuthLoading] = useState(true);
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [subscription, setSubscription] = useState(null);
+  const [hasTrial, setHasTrial] = useState(false);
 
   function handleNewChat() {
     if (user) {
@@ -66,16 +68,64 @@ function MainPage({ app, db }) {
       });
   }
 
+  // Check if a user has had a free trial and create one in database if they haven't
+  const handleTrialPeriod = (user) => {
+    const userRef = ref(db, `trials/${user.uid}`);
+
+    get(userRef).then((snapshot) => {
+      if (snapshot.val() === null) {
+        // create a new user document with the createdAt timestamp
+        set(userRef, {
+          createdAt: Date.now(),
+        })
+          .then(() => {
+            console.log("Trial Started");
+            checkTrialExpired(user);
+          })
+          .catch((error) => {
+            console.log("The write failed...", error);
+          });
+      }
+    });
+  };
+
+  // Checks if user has free trial time
+  const checkTrialExpired = async (user) => {
+    if (!user) return;
+
+    const userRef = ref(db, `trials/${user.uid}`);
+
+    get(userRef).then((snapshot) => {
+      if (snapshot.val() === null) return;
+
+      const trialData = snapshot.val();
+      const createdAt = trialData.createdAt;
+      const now = Date.now();
+
+      const oneDayInMilliseconds = 24 * 60 * 60 * 1000;
+      const trialDuration = now - createdAt;
+
+      // Return true if the trial has not yet expired (is less than one day old)
+      if (trialDuration < oneDayInMilliseconds) {
+        setHasTrial(true);
+      }
+    });
+  };
+
   useEffect(() => {
     // When the authentication state changes (user logging in/out)
     onAuthStateChanged(auth, (user) => {
       setAuthLoading(false);
-      // update user
+      // Update user
       setUser(user);
       // Give new conversation id
       setConversationId(user.uid + Date.now());
-      // load users sub data
+      // Load users sub data
       loadSubscription();
+      // Create free trial if user has never had one
+      handleTrialPeriod(user);
+      // Check if free trial is still active
+      checkTrialExpired(user);
     });
   }, []);
 
@@ -199,6 +249,9 @@ function MainPage({ app, db }) {
           />
         )}
 
+        {/* Displays users free trial status */}
+        {hasTrial && subscription?.role !== "premium" && user && <FreeTrial />}
+
         {/* Takes user to the store, only displayed if user is logged in */}
         <StoreButton user={user} />
 
@@ -260,10 +313,11 @@ function MainPage({ app, db }) {
           </div>
         )}
 
-        {/* If user is subscribed display temperature slider */}
-        {subscription?.role === "premium" && (
+        {/* If user is subscribed or has trial display temperature slider */}
+        {hasTrial ||
+        (subscription?.role === "premium" && !subscription?.ended_at) ? (
           <TemperatureSlider setTemperature={setTemperature} user={user} />
-        )}
+        ) : null}
 
         {/* If the user is not signed in display sign up heading */}
         {!user && !authLoading && (
@@ -271,13 +325,16 @@ function MainPage({ app, db }) {
         )}
 
         {/* If the user isn't subscribed display the visit store heading */}
-        {subscription?.role !== "premium" && user && <NotSubscribedHeading />}
+        {subscription?.role !== "premium" && user && !hasTrial && (
+          <NotSubscribedHeading />
+        )}
 
         {/* Loading spinner when user is logging in */}
         {authLoading && <CircularProgress style={{ color: "#b3befe" }} />}
 
-        {/* If the user is subscribed display the chat input form */}
-        {subscription?.role === "premium" && !subscription?.ended_at && (
+        {/* If the user is subscribed or has trial display the chat input form */}
+        {hasTrial ||
+        (subscription?.role === "premium" && !subscription?.ended_at) ? (
           <ChatInputForm
             input={input}
             setInput={setInput}
@@ -286,7 +343,7 @@ function MainPage({ app, db }) {
             user={user}
             handleLogin={handleLogin}
           />
-        )}
+        ) : null}
 
         <Disclaimer />
       </section>
