@@ -3,4 +3,5 @@
   bottom: 120px;
   left: 80px;
   font-size: 12px;
+  z-index: 100;
 }

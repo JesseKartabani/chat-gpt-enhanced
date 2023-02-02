@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { ref, get } from "firebase/database";
+import { ref, get, onValue } from "firebase/database";
 import { motion } from "framer-motion";
 import "./MessageHistory.css";
 
 // TODO: Allow user to view full conversation when they click a message in history
 
-// MessageHistory component to display first message of each conversation
+// Displays first message of each conversation
 function MessageHistory({ userId, db }) {
   const [messageHistory, setMessageHistory] = useState([]);
 
@@ -14,7 +14,7 @@ function MessageHistory({ userId, db }) {
     // only run if user is logged in
     if (userId) {
       // Get the reference to the database
-      get(ref(db, `messages/${userId}/`)).then((snapshot) => {
+      onValue(ref(db, `messages/${userId}/`), (snapshot) => {
         // Check if data exists for the user
         if (snapshot.exists()) {
           // Get the conversation ids
@@ -46,6 +46,7 @@ function MessageHistory({ userId, db }) {
             );
           });
         } else {
+          setMessageHistory([]);
           console.log("No data available");
         }
       });

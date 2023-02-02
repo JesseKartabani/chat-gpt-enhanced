@@ -1,11 +1,12 @@
 .message-history-container {
   overflow: scroll;
   overflow-x: hidden;
-  max-height: 40%;
+  height: 50%;
+  min-height: 0%;
   margin-top: 30px;
-  border-bottom: 1px solid #404143;
   margin-right: -8px;
   position: fixed;
+  z-index: 40;
 }
 
 .message-button {
@@ -14,6 +15,8 @@
   display: flex;
   align-items: center;
   margin-bottom: -25px;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
 }
 
 .message-container {

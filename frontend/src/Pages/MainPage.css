@@ -9,6 +9,7 @@
   flex: 1;
   position: relative;
   background: linear-gradient(to top, #353740, #444654);
+  z-index: 110;
 }
 
 .chat-log {
@@ -25,7 +26,17 @@
 .mobile-new-chat-button {
   position: sticky;
   top: 0px;
-  z-index: 100;
+  z-index: 200;
+}
+
+.white-buttons {
+  display: flex;
+  position: fixed;
+  bottom: 0px;
+  background-color: #202123;
+  z-index: 90;
+  width: 260px;
+  height: 300px;
 }
 
 @media (min-width: 1024px) {

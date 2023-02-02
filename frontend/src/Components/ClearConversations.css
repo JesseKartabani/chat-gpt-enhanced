@@ -1,0 +1,47 @@
+.clear-conversation-container {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 300px;
+  z-index: 50;
+}
+
+.clear-conversation-button {
+  transition: all 150ms ease-in-out;
+  display: flex;
+  text-align: center;
+  background-color: #202123;
+  color: #dcdce4;
+  border: 1px solid #202123;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  line-height: 1.25rem;
+  padding-left: 7px;
+  padding-right: 113px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  margin-left: -5px;
+  border-top: 1px solid #404143;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.clear-conversation-button:hover {
+  background-color: #343541;
+  border-right-color: #343541;
+  border-bottom-right-radius: 0px;
+}
+
+.clear-conversation-button:active {
+  opacity: 0.2;
+}
+
+.trash-svg {
+  min-height: 16px;
+  min-width: 16px;
+  max-height: 16px;
+  max-width: 16px;
+  margin-right: 10px;
+  margin-top: 1px;
+}

@@ -23,6 +23,7 @@ import TemperatureSlider from "../Components/TemperatureSlider";
 import SignUpHeading from "../Components/SignUpHeading";
 import NotSubscribedHeading from "../Components/NotSubscribedHeading";
 import FreeTrial from "../Components/FreeTrial";
+import ClearConversations from "../Components/ClearConversations";
 
 function MainPage({ app, db }) {
   const provider = new GoogleAuthProvider(app);
@@ -248,6 +249,10 @@ function MainPage({ app, db }) {
             db={db}
           />
         )}
+
+        <div className="white-buttons">
+          <ClearConversations user={user} db={db} />
+        </div>
 
         {/* Displays users free trial status */}
         {hasTrial && subscription?.role !== "premium" && user && <FreeTrial />}

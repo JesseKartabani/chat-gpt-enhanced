@@ -10,6 +10,7 @@
   transition: all 150ms ease-in-out;
   color: white;
   width: 100%;
+  z-index: 400;
 }
 
 .new-chat-button span {
