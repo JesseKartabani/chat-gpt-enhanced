@@ -76,7 +76,7 @@ function BugReportModal({ db, user }) {
       >
         <div className="modal-inner-container">
           {/* Modal label */}
-          <h3 className="modal-label">Submit Bug</h3>
+          <h3 className="modal-label">Report Bug</h3>
           {/* Introduction to bug report */}
           <p>
             If you have stumbled onto a bug, I will need as much detail as
@@ -86,16 +86,14 @@ function BugReportModal({ db, user }) {
 
           {/* Tips for submitting a bug report */}
           <ul className="tips-for-submitting">
+            <li>Be specific about every step that leads to the problem.</li>
             <li>
-              <b>Be specific</b> about every step that leads to the problem.
+              Avoid typos or abbreviations, which make bugs much harder to track
+              down.
             </li>
             <li>
-              <b>Avoid typos or abbreviations,</b> which make bugs much harder
-              to track down.
-            </li>
-            <li>
-              Include <b>how long</b> you have been seeing the problem, and{" "}
-              <b>how often</b> (if more than once)
+              Include how long you have been seeing the problem, and how often
+              (if more than once).
             </li>
           </ul>
 

@@ -2,21 +2,23 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-28%, -50%);
   z-index: 1040;
   border: 3px solid #8d8f98;
   border-radius: 10px;
   background-color: #121212;
   box-shadow: 0 20px 15px rgba(0, 0, 0, 0.5);
   padding: 20px;
+  width: 600px;
 }
 
 .modal-label {
   font-size: 22px;
+  color: white;
 }
 
 .modal-inner-container {
-  color: white;
+  color: #e5e5e4;
   text-align: center;
 }
 
@@ -35,11 +37,10 @@
   width: 400px;
   height: 150px;
   border-radius: 10px;
-  border: 1px solid black;
   padding: 10px;
   resize: none;
   background-color: #3f414d;
-  color: white;
+  color: #e5e5e4;
   font-size: 16px;
 }
 
@@ -47,7 +48,7 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-  color: white;
+  color: #e5e5e4;
   margin: 30px 0;
   text-align: left;
 }
