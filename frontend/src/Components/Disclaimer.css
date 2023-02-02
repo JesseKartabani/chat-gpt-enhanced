@@ -1,6 +1,6 @@
 .disclaimer-container {
   position: absolute;
-  bottom: 0;
+  bottom: 4px;
   right: 0;
   left: 0;
   font-size: 6px;
@@ -18,7 +18,7 @@
 
 @media (min-width: 1024px) {
   .disclaimer-container {
-    bottom: 0;
+    bottom: 8px;
     font-size: 13px;
   }
 

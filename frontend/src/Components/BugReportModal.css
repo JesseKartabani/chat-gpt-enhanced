@@ -4,16 +4,20 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1040;
-  border: 2px solid white;
+  border: 3px solid #8d8f98;
   border-radius: 10px;
-  background-color: #000000;
+  background-color: #121212;
   box-shadow: 0 20px 15px rgba(0, 0, 0, 0.5);
   padding: 20px;
 }
 
+.modal-label {
+  font-size: 22px;
+}
+
 .modal-inner-container {
   color: white;
-  font-size: 12px;
+  text-align: center;
 }
 
 .bug-form {
@@ -28,62 +32,81 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-  width: 200px;
+  width: 400px;
   height: 150px;
+  border-radius: 10px;
+  border: 1px solid black;
+  padding: 10px;
+  resize: none;
+  background-color: #3f414d;
+  color: white;
+  font-size: 16px;
+}
+
+.tips-for-submitting {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  color: white;
+  margin: 30px 0;
+  text-align: left;
 }
 
 .open-modal-button {
-  margin: 20px;
-  padding: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-  border: 1px solid white;
+  transition: all 150ms ease-in-out;
+  display: flex;
+  text-align: center;
+  background-color: #202123;
+  color: #dcdce4;
+  border: 1px solid #202123;
   border-radius: 10px;
-  background: linear-gradient(265.27deg, #0000 20.55%, white 94.17%);
-  background-color: white;
-  transition: all 0.2s ease-in-out;
-  font-weight: bold;
-}
-
-.open-modal-button:hover {
-  background-color: #8bb2ff;
-  border-color: black;
-  scale: 1.08;
-}
-
-.open-modal-button:active {
-  opacity: 0.2;
+  font-size: 0.9rem;
+  line-height: 1.25rem;
+  padding-left: 7px;
+  padding-right: 170px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  margin-left: -5px;
+  margin-right: -5px;
+  white-space: nowrap;
 }
 
 .submit-bug-button {
-  margin: 20px;
-  margin-bottom: 0px;
-  padding: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-  border: 1px solid white;
+  transition: all 150ms ease-in-out;
+  background-color: transparent;
+  color: white;
   border-radius: 10px;
-  background: linear-gradient(265.27deg, #0000 20.55%, white 94.17%);
-  background-color: white;
-  transition: all 0.2s ease-in-out;
-  font-weight: 600;
+  margin-top: 20px;
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border: 1.4px solid #8d8f98;
+  font-size: 16px;
+}
+
+.bug-svg {
+  min-height: 16px;
+  min-width: 16px;
+  max-height: 16px;
+  max-width: 16px;
+  margin-right: 10px;
+  margin-top: 1px;
 }
 
 .submit-bug-button:hover {
-  background-color: #8bb2ff;
-  border-color: black;
+  background-color: #343541;
+  border: 1.4px solid #343541;
 }
 
+.open-modal-button:hover {
+  background-color: #343541;
+  border-color: #343541;
+}
+
+.open-modal-button:active,
 .submit-bug-button:active {
   opacity: 0.2;
 }
 
 @media (min-width: 1024px) {
-  .modal-inner-container {
-    font-size: 14px;
-  }
-
-  .bug-form-textarea {
-    width: 300px;
-  }
 }

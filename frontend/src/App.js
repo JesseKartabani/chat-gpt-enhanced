@@ -3,7 +3,6 @@ import { getAnalytics } from "firebase/analytics";
 import { getDatabase } from "firebase/database";
 import { Route, Routes } from "react-router-dom";
 import MainPage from "./Pages/MainPage";
-import DevLogsPage from "./Pages/DevLogsPage";
 import Error404Page from "./Pages/Error404Page";
 import StorePage from "./Pages/StorePage";
 
@@ -28,8 +27,6 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<MainPage app={app} db={db} />} />
-
-      <Route path="/developer-logs" element={<DevLogsPage db={db} />} />
 
       <Route path="/store" element={<StorePage app={app} />} />
 

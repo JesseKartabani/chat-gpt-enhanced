@@ -6,6 +6,7 @@ import NewChatButton from "../Components/NewChatButton";
 import Hero from "../Components/Hero";
 import GoogleAuthButtons from "../Components/GoogleAuthButtons";
 import MessageHistory from "../Components/MessageHistory";
+import BugReportModal from "../Components/BugReportModal";
 import {
   GoogleAuthProvider,
   getAuth,
@@ -252,6 +253,7 @@ function MainPage({ app, db }) {
 
         <div className="white-buttons">
           <ClearConversations user={user} db={db} />
+          <BugReportModal user={user} db={db} />
         </div>
 
         {/* Displays users free trial status */}

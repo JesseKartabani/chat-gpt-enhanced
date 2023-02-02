@@ -15,7 +15,7 @@ const Backdrop = styled("div")`
   opacity: 0.5;
 `;
 
-function BugReportModal({ db }) {
+function BugReportModal({ db, user }) {
   const [show, setShow] = useState(false);
   const [input, setInput] = useState("");
 
@@ -44,13 +44,27 @@ function BugReportModal({ db }) {
   return (
     <div className="modal-example">
       {/* Open modal button */}
-      <button
-        type="button"
-        className="open-modal-button"
-        onClick={() => setShow(true)}
-      >
-        Report Bugs
-      </button>
+      {user && (
+        <button
+          type="button"
+          className="open-modal-button"
+          onClick={() => setShow(true)}
+        >
+          <svg
+            stroke="currentColor"
+            fill="none"
+            strokeWidth={2}
+            viewBox="0 0 24 24"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="bug-svg"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" />
+          </svg>
+          Report bugs
+        </button>
+      )}
 
       {/* The Modal component */}
       <Modal
@@ -62,16 +76,16 @@ function BugReportModal({ db }) {
       >
         <div className="modal-inner-container">
           {/* Modal label */}
-          <h3 id="modal-label">Submit Bug</h3>
+          <h3 className="modal-label">Submit Bug</h3>
           {/* Introduction to bug report */}
           <p>
             If you have stumbled onto a bug, I will need as much detail as
             possible to find and fix it. Using the field below, please describe
-            the issue:
+            the issue.
           </p>
 
           {/* Tips for submitting a bug report */}
-          <ul>
+          <ul className="tips-for-submitting">
             <li>
               <b>Be specific</b> about every step that leads to the problem.
             </li>
@@ -89,7 +103,7 @@ function BugReportModal({ db }) {
           <form onSubmit={handleSubmit} className="bug-form">
             <textarea
               className="bug-form-textarea"
-              maxLength="1000"
+              maxLength="3000"
               required={true}
               placeholder="Describe the bug"
               value={input}
