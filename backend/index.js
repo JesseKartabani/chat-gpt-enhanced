@@ -26,8 +26,20 @@ app.use(cors());
 // Set the server port
 const port = process.env.PORT || 5000;
 
+validApiKey = process.env.MY_API_KEY;
+
 // Define a POST endpoint for generating completions
 app.post("/", async (req, res) => {
+  // Get the API key from the request headers
+  const myApiKey = req.headers.authorization;
+
+  // Check the API key against the valid API key
+  if (myApiKey !== `Bearer ${validApiKey}`) {
+    return res.status(401).json({
+      error: "Unauthorized",
+    });
+  }
+
   // Get the message and temperature from the request body
   const { message } = req.body;
   const { temperature } = req.body;

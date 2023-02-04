@@ -30,6 +30,7 @@ function MainPage({ app, db }) {
   const provider = new GoogleAuthProvider(app);
   const auth = getAuth(app);
   const firestoreDB = getFirestore(app);
+  const API_KEY = process.env.REACT_APP_MY_API_KEY;
 
   const [user, setUser] = useState(null);
   const [conversationId, setConversationId] = useState(null);
@@ -182,6 +183,7 @@ function MainPage({ app, db }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${API_KEY}`,
         },
         // Post the last 6 messages (including the ai responses)
         // and the temperature for the current prompt
