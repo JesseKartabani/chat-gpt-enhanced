@@ -26,15 +26,17 @@ app.use(cors());
 // Set the server port
 const port = process.env.PORT || 5000;
 
-validApiKey = process.env.MY_API_KEY;
+// The allowed origin for incoming requests
+const allowedOrigin = "https://chat-gpt-enhanced.web.app/";
 
 // Define a POST endpoint for generating completions
 app.post("/", async (req, res) => {
-  // Get the API key from the request headers
-  const myApiKey = req.headers.authorization;
+  // Get the origin from the request headers
+  const origin = req.get("Origin");
+  console.log(origin);
 
-  // Check the API key against the valid API key
-  if (myApiKey !== `Bearer ${validApiKey}`) {
+  // Check the origin against the allowed origin
+  if (origin !== allowedOrigin) {
     return res.status(401).json({
       error: "Unauthorized",
     });
