@@ -6,6 +6,7 @@ const express = require("express");
 const { Configuration, OpenAIApi } = require("openai");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const rateLimit = require("express-rate-limit");
 
 // Create a new OpenAI configuration object
 const configuration = new Configuration({
@@ -19,6 +20,14 @@ const openai = new OpenAIApi(configuration);
 // Create a new Express app
 const app = express();
 
+// create a rate limiter that limits each user to 100 requests per hour
+const userRateLimit = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hour window
+  max: 45, // limit each user to 45 requests per windowMs (1 hour)
+  message: "Too many requests, please try again later",
+  keyGenerator: (req) => req.headers.uid, // user.uid
+});
+
 // Configure CORS to allow requests from a specific domain
 const corsOptions = {
   origin: "https://chat-gpt-enhanced.web.app",
@@ -27,6 +36,8 @@ const corsOptions = {
 app.use(bodyParser.json());
 // Apply the CORS middleware with the configured options
 app.use(cors(corsOptions));
+// apply the userRateLimit middleware to all requests
+app.use(userRateLimit);
 
 // Set the server port
 const port = process.env.PORT || 5000;

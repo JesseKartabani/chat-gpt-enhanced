@@ -25,6 +25,7 @@ import SignUpHeading from "../Components/SignUpHeading";
 import NotSubscribedHeading from "../Components/NotSubscribedHeading";
 import FreeTrial from "../Components/FreeTrial";
 import ClearConversations from "../Components/ClearConversations";
+import RateLimitError from "../Components/RateLimitError";
 
 function MainPage({ app, db }) {
   const provider = new GoogleAuthProvider(app);
@@ -37,6 +38,7 @@ function MainPage({ app, db }) {
   const [isLoggingIn, setIsLoggingIn] = useState(false);
   const [subscription, setSubscription] = useState(null);
   const [hasTrial, setHasTrial] = useState(false);
+  const [isRateLimited, setIsRateLimited] = useState(false);
 
   function handleNewChat() {
     if (user) {
@@ -64,6 +66,8 @@ function MainPage({ app, db }) {
         console.log("Logged out");
         clearInput();
         clearChat();
+        setIsLoading(false);
+        setIsRateLimited(false);
       })
       .catch((error) => {
         console.log(error);
@@ -182,6 +186,7 @@ function MainPage({ app, db }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          uid: user.uid,
         },
         // Post the last 6 messages (including the ai responses)
         // and the temperature for the current prompt
@@ -191,6 +196,14 @@ function MainPage({ app, db }) {
         }),
       }
     );
+
+    // If user hit rate limit display error
+    if (!response.ok) {
+      setIsRateLimited(true);
+      throw new Error("Network response was not okay");
+    } else {
+      setIsRateLimited(false);
+    }
 
     // Get the response data in JSON format
     const data = await response.json();
@@ -281,8 +294,12 @@ function MainPage({ app, db }) {
           />
         </div>
 
-        {/* Only display hero if theres no chats */}
-        {chatLog.length === 0 && <Hero />}
+        {/* Only display hero if theres no chats and if user isn't rate limited */}
+        {chatLog.length === 0 && !isRateLimited && <Hero />}
+
+        {isRateLimited && (
+          <RateLimitError clearChat={clearChat} setIsLoading={setIsLoading} />
+        )}
 
         {/* Store button for mobile only */}
         <div className="mobile-store-button">
@@ -290,20 +307,22 @@ function MainPage({ app, db }) {
         </div>
 
         {/* Chat log (the actual messages) */}
-        <div className="chat-log">
-          {chatLog.map((message, index) => (
-            <ChatMessage
-              key={index}
-              message={message}
-              isLastMessage={index === chatLog.length - 1}
-            />
-          ))}
-          {isLoading === true && (
-            <div className="circular-progress">
-              <CircularProgress style={{ color: "#b3befe" }} />
-            </div>
-          )}
-        </div>
+        {!isRateLimited && (
+          <div className="chat-log">
+            {chatLog.map((message, index) => (
+              <ChatMessage
+                key={index}
+                message={message}
+                isLastMessage={index === chatLog.length - 1}
+              />
+            ))}
+            {isLoading === true && (
+              <div className="circular-progress">
+                <CircularProgress style={{ color: "#b3befe" }} />
+              </div>
+            )}
+          </div>
+        )}
 
         {/* 
           Login button for mobile only 
@@ -322,7 +341,9 @@ function MainPage({ app, db }) {
 
         {/* If user is subscribed or has trial display temperature slider */}
         {hasTrial ||
-        (subscription?.role === "premium" && !subscription?.ended_at) ? (
+        (subscription?.role === "premium" &&
+          !subscription?.ended_at &&
+          !isRateLimited) ? (
           <TemperatureSlider setTemperature={setTemperature} user={user} />
         ) : null}
 
@@ -341,7 +362,9 @@ function MainPage({ app, db }) {
 
         {/* If the user is subscribed or has trial display the chat input form */}
         {hasTrial ||
-        (subscription?.role === "premium" && !subscription?.ended_at) ? (
+        (subscription?.role === "premium" &&
+          !subscription?.ended_at &&
+          !isRateLimited) ? (
           <ChatInputForm
             input={input}
             setInput={setInput}
