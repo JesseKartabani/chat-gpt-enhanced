@@ -21,7 +21,7 @@ const app = express();
 
 // Configure CORS to allow requests from a specific domain
 const corsOptions = {
-  origin: "https://chat-gpt-enhanced.web.app/",
+  origin: "https://chat-gpt-enhanced.web.app",
 };
 
 app.use(bodyParser.json());
