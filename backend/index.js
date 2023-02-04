@@ -19,29 +19,20 @@ const openai = new OpenAIApi(configuration);
 // Create a new Express app
 const app = express();
 
-// Apply middlewares
+// Configure CORS to allow requests from a specific domain
+const corsOptions = {
+  origin: "https://chat-gpt-enhanced.web.app/",
+};
+
 app.use(bodyParser.json());
-app.use(cors());
+// Apply the CORS middleware with the configured options
+app.use(cors(corsOptions));
 
 // Set the server port
 const port = process.env.PORT || 5000;
 
-// The allowed origin for incoming requests
-const allowedOrigin = "https://chat-gpt-enhanced.web.app/";
-
 // Define a POST endpoint for generating completions
 app.post("/", async (req, res) => {
-  // Get the origin from the request headers
-  const origin = req.get("Origin");
-  console.log(origin);
-
-  // Check the origin against the allowed origin
-  if (origin !== allowedOrigin) {
-    return res.status(401).json({
-      error: "Unauthorized",
-    });
-  }
-
   // Get the message and temperature from the request body
   const { message } = req.body;
   const { temperature } = req.body;
