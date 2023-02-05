@@ -16,7 +16,7 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { collection, getDocs, getFirestore } from "firebase/firestore";
-import { ref, push, get, set } from "firebase/database";
+import { ref, push, get, set, update, increment } from "firebase/database";
 import StoreButton from "../Components/StoreButton";
 import "./MainPage.css";
 import Disclaimer from "../Components/Disclaimer";
@@ -151,8 +151,10 @@ function MainPage({ app, db }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    // Create reference to the user's chat log in the database
+    // Create reference to user's chat log in the database
     const chatRef = ref(db, `messages/${user.uid}/${conversationId}`);
+    // Create reference to user's token usage in the database
+    const tokenRef = ref(db, `token-usage/${user.uid}`);
     // Add user's input to the chat log
     let chatLogNew = [...chatLog, { user: "me", message: `${input}` }];
 
@@ -207,18 +209,26 @@ function MainPage({ app, db }) {
 
     // Get the response data in JSON format
     const data = await response.json();
-    if (user) {
-      // Push the AI response to the database
-      push(chatRef, {
-        user: "gpt",
-        message: data.message,
-        timestamp: Date.now(),
-      })
-        .then(() => {})
-        .catch((error) => {
-          console.log("The write failed...", error);
-        });
-    }
+
+    // Push the AI response to the database
+    push(chatRef, {
+      user: "gpt",
+      message: data.message,
+      timestamp: Date.now(),
+    })
+      .then(() => {})
+      .catch((error) => {
+        console.log("The write failed...", error);
+      });
+
+    // Push the token usage to the database
+    update(tokenRef, {
+      total_tokens_used: increment(data.token_usage),
+    })
+      .then(() => {})
+      .catch((error) => {
+        console.log("The write failed...", error);
+      });
 
     // Set the chat log with the AI response
     setChatLog([...chatLogNew, { user: "gpt", message: `${data.message}` }]);

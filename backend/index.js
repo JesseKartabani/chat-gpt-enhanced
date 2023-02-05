@@ -62,6 +62,7 @@ app.post("/", async (req, res) => {
   // Respond with the ai's generated message
   res.json({
     message: response.data.choices[0].text,
+    token_usage: response.data.usage.total_tokens,
   });
 });
 
