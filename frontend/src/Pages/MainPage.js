@@ -26,6 +26,7 @@ import NotSubscribedHeading from "../Components/NotSubscribedHeading";
 import FreeTrial from "../Components/FreeTrial";
 import ClearConversations from "../Components/ClearConversations";
 import RateLimitError from "../Components/RateLimitError";
+import ResponseFailedError from "../Components/ResponseFailedError";
 
 function MainPage({ app, db }) {
   const provider = new GoogleAuthProvider(app);
@@ -39,6 +40,7 @@ function MainPage({ app, db }) {
   const [subscription, setSubscription] = useState(null);
   const [hasTrial, setHasTrial] = useState(false);
   const [isRateLimited, setIsRateLimited] = useState(false);
+  const [responseFailed, setResponseFailed] = useState(false);
 
   function handleNewChat() {
     if (user) {
@@ -197,15 +199,23 @@ function MainPage({ app, db }) {
           temperature: temperature,
         }),
       }
-    );
+    ).catch((error) => {
+      // Show response failed error
+      setResponseFailed(true);
+      setIsLoading(false);
+      throw new Error("API response was not okay");
+    });
 
     // If user hit rate limit display error
-    if (!response.ok) {
+    if (response.status === 429) {
       setIsRateLimited(true);
-      throw new Error("Network response was not okay");
-    } else {
-      setIsRateLimited(false);
+      setIsLoading(false);
+      throw new Error("Rate limit reached");
     }
+
+    // Response was successful
+    setIsRateLimited(false);
+    setResponseFailed(false);
 
     // Get the response data in JSON format
     const data = await response.json();
@@ -264,6 +274,8 @@ function MainPage({ app, db }) {
           clearInput={clearInput}
           handleNewChat={handleNewChat}
           isLoading={isLoading}
+          setIsRateLimited={setIsRateLimited}
+          setResponseFailed={setResponseFailed}
         />
         {/* Display message history if user is logged in */}
         {user && (
@@ -301,15 +313,14 @@ function MainPage({ app, db }) {
             clearChat={clearChat}
             clearInput={clearInput}
             isLoading={isLoading}
+            handleNewChat={handleNewChat}
+            setIsRateLimited={setIsRateLimited}
+            setResponseFailed={setResponseFailed}
           />
         </div>
 
         {/* Only display hero if theres no chats and if user isn't rate limited */}
         {chatLog.length === 0 && !isRateLimited && <Hero />}
-
-        {isRateLimited && (
-          <RateLimitError clearChat={clearChat} setIsLoading={setIsLoading} />
-        )}
 
         {/* Store button for mobile only */}
         <div className="mobile-store-button">
@@ -333,6 +344,10 @@ function MainPage({ app, db }) {
             )}
           </div>
         )}
+
+        {/* Error messages */}
+        {isRateLimited && <RateLimitError />}
+        {responseFailed && <ResponseFailedError />}
 
         {/* 
           Login button for mobile only 
