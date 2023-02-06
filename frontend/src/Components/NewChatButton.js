@@ -1,7 +1,14 @@
 import "./NewChatButton.css";
 import React from "react";
 
-const NewChatButton = ({ clearChat, clearInput, handleNewChat, isLoading }) => {
+const NewChatButton = ({
+  clearChat,
+  clearInput,
+  handleNewChat,
+  isLoading,
+  setIsRateLimited,
+  setResponseFailed,
+}) => {
   function handleClick() {
     // Clear old messages
     clearChat();
@@ -9,6 +16,10 @@ const NewChatButton = ({ clearChat, clearInput, handleNewChat, isLoading }) => {
     clearInput();
     // Sets a new conversation id
     handleNewChat();
+    // Remove rate limit error message
+    setIsRateLimited(false);
+    // Remove response failed error message
+    setResponseFailed(false);
   }
 
   return (

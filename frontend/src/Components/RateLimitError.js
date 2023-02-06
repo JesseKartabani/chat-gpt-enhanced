@@ -1,12 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./RateLimitError.css";
 
-function RateLimitError({ clearChat, setIsLoading }) {
-  useEffect(() => {
-    clearChat();
-    setIsLoading(false);
-  }, []);
-
+function RateLimitError() {
   return (
     <div className="rate-limit-error-container">
       <div className="rate-limit-error">
