@@ -28,8 +28,14 @@ const userRateLimit = rateLimit({
   keyGenerator: (req) => req.headers.uid, // user.uid
 });
 
+// Configure CORS to allow requests from a specific domain
+const corsOptions = {
+  origin: "https://chat-gpt-enhanced.web.app",
+};
+
 app.use(bodyParser.json());
-app.use(cors());
+// Apply the CORS middleware with the configured options
+app.use(cors(corsOptions));
 // apply the userRateLimit middleware to all requests
 app.use(userRateLimit);
 
@@ -38,11 +44,6 @@ const port = process.env.PORT || 5000;
 
 // Define a POST endpoint for generating completions
 app.post("/", async (req, res) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://chat-gpt-enhanced.web.app" // Only site allowed access
-  );
-
   // Get the message and temperature from the request body
   const { message } = req.body;
   const { temperature } = req.body;
