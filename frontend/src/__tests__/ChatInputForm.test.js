@@ -1,6 +1,5 @@
 import React from "react";
 import { render, fireEvent, cleanup } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
 import ChatInputForm from "../Components/ChatInputForm";
 
 afterEach(cleanup);
@@ -8,7 +7,7 @@ afterEach(cleanup);
 describe("ChatInputForm component", () => {
   const input = "";
   const setInput = jest.fn();
-  const handleSubmit = jest.fn();
+  const handleSubmit = jest.fn((e) => e.preventDefault());
   const isLoading = false;
   const user = true;
 
@@ -66,7 +65,7 @@ describe("ChatInputForm component", () => {
     expect(setInput).toHaveBeenCalledWith("test input");
   });
 
-  it("should call handleSubmit when submit button is clicked", () => {
+  it("Should call handleSubmit when submit button is clicked", () => {
     const { getByTestId } = render(
       <ChatInputForm
         input={input}
@@ -76,13 +75,13 @@ describe("ChatInputForm component", () => {
         user={user}
       />
     );
-    const submitButton = getByTestId("submit-button");
+    const form = getByTestId("chat-input-form");
 
-    fireEvent.click(submitButton);
+    fireEvent.submit(form);
     expect(handleSubmit).toHaveBeenCalled();
   });
 
-  it("should change isListening on mic button click", () => {
+  it("Should change isListening on mic button click", () => {
     const { getByLabelText, getByTestId } = render(
       <ChatInputForm
         input={input}

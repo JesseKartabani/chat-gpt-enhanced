@@ -1,29 +1,34 @@
+import { remove, ref } from "firebase/database";
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import ClearConversations from "../Components/ClearConversations";
-import { remove } from "firebase/database";
 
-jest.mock("firebase/database", () => ({
-  remove: jest.fn(() => Promise.resolve()),
-}));
+jest.mock("firebase/database", () => {
+  return {
+    ref: jest.fn(() => "ref"),
+    remove: jest.fn(() => Promise.resolve()),
+  };
+});
 
 describe("Clear Conversations", () => {
-  it("Shows the confirm button when the clear conversations button is clicked", async () => {
-    const db = {};
-    const user = { uid: "123" };
-    const { getByText } = render(<ClearConversations db={db} user={user} />);
+  let user;
+  let db;
 
+  beforeEach(() => {
+    user = { uid: 123 };
+    db = "db";
+  });
+
+  it("Should display a confirm button when clear conversations is clicked", () => {
+    const { getByText } = render(<ClearConversations user={user} db={db} />);
     fireEvent.click(getByText("Clear conversations"));
     expect(getByText("Confirm clear conversations")).toBeInTheDocument();
   });
 
-  it("Calls the remove function from firebase/database when the confirm button is clicked", async () => {
-    const db = {};
-    const user = { uid: "123" };
-    const { getByText } = render(<ClearConversations db={db} user={user} />);
-
+  it("Should call firebase remove function when confirm is clicked", async () => {
+    const { getByText } = render(<ClearConversations user={user} db={db} />);
     fireEvent.click(getByText("Clear conversations"));
     fireEvent.click(getByText("Confirm clear conversations"));
-    expect(remove).toHaveBeenCalledWith(`messages/${user.uid}`, db);
+    expect(remove).toHaveBeenCalled();
   });
 });

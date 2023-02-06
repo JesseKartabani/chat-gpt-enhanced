@@ -13,11 +13,7 @@ function ClearConversations({ user, db }) {
     setShowConfirm(false);
 
     // Remove user's message history
-    remove(ref(db, `messages/${user.uid}`))
-      .then(() => {})
-      .catch((error) => {
-        alert("There was an error:" + error);
-      });
+    remove(ref(db, `messages/${user.uid}`));
   };
 
   return (
