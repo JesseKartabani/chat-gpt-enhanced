@@ -4,7 +4,7 @@ Leverages OpenAI's GPT model (text-davinci-003) to generate natural language res
 
 ## [Live Website](https://chat-gpt-enhanced.web.app/)
 
-![ChatGPT Enhanced website](https://user-images.githubusercontent.com/69617120/216333105-fd33fcad-d9a6-4946-98cb-828defad7676.PNG)
+![ChatGPT Enhanced website](https://user-images.githubusercontent.com/69617120/217255111-32176fa5-643e-42ca-812c-47b73194088c.PNG)
 
 ## API
 
