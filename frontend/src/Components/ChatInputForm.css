@@ -56,12 +56,13 @@
   border: 1px solid #373942;
   border-radius: 10px;
   color: gray;
-  background-color: #373942;
+  background-color: #363842;
   position: absolute;
   bottom: 40px;
   left: 10%;
   transform: translateX(-50%);
   padding: 4px;
+  padding-top: 6px;
 }
 
 .mic-button:hover {

@@ -1,0 +1,29 @@
+.code-mode-help {
+  display: none;
+}
+
+.code-mode-help-link {
+  color: white;
+  text-decoration: none;
+  font-size: 2em;
+  font-weight: 700;
+  transition: all 0.2s ease-in-out;
+}
+
+.code-mode-help-link:hover {
+  cursor: pointer;
+  scale: 1.06;
+  text-decoration: underline;
+}
+
+.code-mode-help-link:active {
+  opacity: 0.2;
+}
+
+@media (min-width: 1024px) {
+  .code-mode-help {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

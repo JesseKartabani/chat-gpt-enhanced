@@ -44,14 +44,15 @@ const port = process.env.PORT || 5000;
 
 // Define a POST endpoint for generating completions
 app.post("/", async (req, res) => {
-  // Get the message and temperature from the request body
+  // Get the message, model and temperature from the request body
   const { message } = req.body;
   const { temperature } = req.body;
+  const { model } = req.body;
 
   // Create a completion using the OpenAI API
   const response = await openai.createCompletion({
-    // Can change this to any model (text-davinci-003 is the most expensive)
-    model: "text-davinci-003",
+    // Can change this to any open ai model (text-davinci-003 is the most expensive)
+    model: `${model}`,
     prompt: `${message}`,
     // Max size of the ai response, also includes the token size of the prompt
     max_tokens: 800,

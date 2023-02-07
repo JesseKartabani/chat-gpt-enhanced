@@ -2,8 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import "./ChatMessage.css";
 import { motion } from "framer-motion";
 import { Cursor, useTypewriter } from "react-simple-typewriter";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-const ChatMessage = ({ message, isLastMessage }) => {
+const ChatMessage = ({ message, isLastMessage, selectedModel }) => {
   // Reference to messagesEnd component for scrolling to bottom
   const messagesEndRef = useRef(null);
 
@@ -36,20 +38,16 @@ const ChatMessage = ({ message, isLastMessage }) => {
 
   useEffect(() => {
     if (text.length === message.message.length) {
-      // Typewriter is done, hide the cursor and show copy button
+      // Typewriter is done, hide the cursor, show copy button and scroll to bottom
       setCursorVisible("");
       setCopyButtonVisible(true);
+      scrollToBottom();
     } else {
       // Typewriter is still typing, show the cursor and hide copy button
       setCursorVisible("|");
       setCopyButtonVisible(false);
     }
   }, [message.message.length, text.length]);
-
-  // Scroll to bottom of screen when a new ai message is added
-  useEffect(() => {
-    scrollToBottom();
-  }, [text]);
 
   return (
     <motion.div
@@ -97,14 +95,29 @@ const ChatMessage = ({ message, isLastMessage }) => {
 
         {/* AI message */}
         {message.user === "gpt" && (
-          <div
-            ref={messagesEndRef}
-            className="message"
-            data-testid="ai-message"
-          >
+          <div className="message" data-testid="ai-message">
             {/* Typewriter text followed by cursor */}
-            {text.trimStart()}
-            <Cursor cursorColor="white" cursorStyle={cursorVisible} />
+            {selectedModel === "text-davinci-003" && (
+              <>
+                {text.trimStart()}
+                <Cursor cursorColor="white" cursorStyle={cursorVisible} />
+              </>
+            )}
+
+            {/* If selected model is coding then add syntax highlighter */}
+            {selectedModel === "code-davinci-002" && (
+              <>
+                <SyntaxHighlighter
+                  className="syntax-highlighter"
+                  language="javascript"
+                  style={atomDark}
+                  wrapLongLines={true}
+                >
+                  {text.trimStart()}
+                </SyntaxHighlighter>
+              </>
+            )}
+
             {/* Display copy to clipboard button if last message */}
             {isLastMessage && copyButtonVisible && text !== "" ? (
               <button
@@ -130,6 +143,7 @@ const ChatMessage = ({ message, isLastMessage }) => {
                 &nbsp; {buttonText}
               </button>
             ) : null}
+            <div ref={messagesEndRef} />
           </div>
         )}
       </div>

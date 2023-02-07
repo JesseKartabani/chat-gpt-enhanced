@@ -27,6 +27,8 @@ import FreeTrial from "../Components/FreeTrial";
 import ClearConversations from "../Components/ClearConversations";
 import RateLimitError from "../Components/RateLimitError";
 import ResponseFailedError from "../Components/ResponseFailedError";
+import ModeChanger from "../Components/ModeChanger";
+import CodingModeGuide from "../Components/CodingModeGuide";
 
 function MainPage({ app, db }) {
   const provider = new GoogleAuthProvider(app);
@@ -41,6 +43,7 @@ function MainPage({ app, db }) {
   const [hasTrial, setHasTrial] = useState(false);
   const [isRateLimited, setIsRateLimited] = useState(false);
   const [responseFailed, setResponseFailed] = useState(false);
+  const [selectedModel, setSelectedModel] = useState("text-davinci-003");
 
   function handleNewChat() {
     if (user) {
@@ -143,6 +146,11 @@ function MainPage({ app, db }) {
   // Default temperature is 0.5 (must match temperature sliders default value/100)
   const [temperature, setTemperature] = useState(0.5);
 
+  // Set temperature to 0 when user swaps to codex model and 0.5 when swapping back
+  useEffect(() => {
+    setTemperature(selectedModel === "code-davinci-002" ? 0 : 0.5);
+  }, [selectedModel]);
+
   function clearChat() {
     setChatLog([]);
   }
@@ -197,6 +205,7 @@ function MainPage({ app, db }) {
         body: JSON.stringify({
           message: messages,
           temperature: temperature,
+          model: selectedModel,
         }),
       }
     ).catch((error) => {
@@ -291,6 +300,17 @@ function MainPage({ app, db }) {
           <BugReportModal user={user} db={db} />
         </div>
 
+        <ModeChanger
+          user={user}
+          setSelectedModel={setSelectedModel}
+          selectedModel={selectedModel}
+          clearChat={clearChat}
+          clearInput={clearInput}
+          isLoading={isLoading}
+          setIsRateLimited={setIsRateLimited}
+          setResponseFailed={setResponseFailed}
+        />
+
         {/* Displays users free trial status */}
         {hasTrial && subscription?.role !== "premium" && user && <FreeTrial />}
 
@@ -335,6 +355,7 @@ function MainPage({ app, db }) {
                 key={index}
                 message={message}
                 isLastMessage={index === chatLog.length - 1}
+                selectedModel={selectedModel}
               />
             ))}
             {isLoading === true && (
@@ -368,7 +389,8 @@ function MainPage({ app, db }) {
         {hasTrial ||
         (subscription?.role === "premium" &&
           !subscription?.ended_at &&
-          !isRateLimited) ? (
+          !isRateLimited &&
+          selectedModel === "text-davinci-003") ? (
           <TemperatureSlider setTemperature={setTemperature} user={user} />
         ) : null}
 
@@ -376,6 +398,16 @@ function MainPage({ app, db }) {
         {!user && !authLoading && (
           <SignUpHeading handleLogin={handleLogin} isLoggingIn={isLoggingIn} />
         )}
+
+        {/* If user is in code mode show coding mode guide */}
+        {hasTrial ||
+        (subscription?.role === "premium" &&
+          !subscription?.ended_at &&
+          !isRateLimited &&
+          user &&
+          chatLog.length === 0) ? (
+          <CodingModeGuide selectedModel={selectedModel} />
+        ) : null}
 
         {/* If the user isn't subscribed display the visit store heading */}
         {subscription?.role !== "premium" && user && !hasTrial && (
@@ -397,6 +429,7 @@ function MainPage({ app, db }) {
             isLoading={isLoading}
             user={user}
             handleLogin={handleLogin}
+            selectedModel={selectedModel}
           />
         ) : null}
 

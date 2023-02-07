@@ -30,6 +30,7 @@
 .google-button:hover {
   background-color: #9f4cff;
   scale: 1.04;
+  cursor: pointer;
 }
 
 .google-button:active {

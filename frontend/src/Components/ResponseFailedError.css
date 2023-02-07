@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 60vh;
   margin: 10px;
   margin-top: 20px;
 }
@@ -13,7 +12,6 @@
 
 @media (min-width: 1024px) {
   .response-failed-error-container {
-    height: 60vh;
     font-size: 20px;
     margin-top: 30px;
   }

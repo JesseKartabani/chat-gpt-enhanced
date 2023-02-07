@@ -24,6 +24,7 @@
   background-color: rgba(107, 114, 128, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.3);
   scale: 1.04;
+  cursor: pointer;
 }
 
 .new-chat-button:active {

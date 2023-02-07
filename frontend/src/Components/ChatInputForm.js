@@ -5,7 +5,14 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import { motion } from "framer-motion";
 
-const ChatInputForm = ({ input, setInput, handleSubmit, isLoading, user }) => {
+const ChatInputForm = ({
+  input,
+  setInput,
+  handleSubmit,
+  isLoading,
+  user,
+  selectedModel,
+}) => {
   // Hook to get transcript (the speech-to-text)
   const { transcript } = useSpeechRecognition();
   const [lastTranscript, setLastTranscript] = useState(transcript);
@@ -87,7 +94,12 @@ const ChatInputForm = ({ input, setInput, handleSubmit, isLoading, user }) => {
               className="chat-input-textarea"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Prompt"
+              // Change placeholder based on selected model
+              placeholder={
+                selectedModel === "code-davinci-002"
+                  ? "Start with a comment, data or code"
+                  : "Prompt"
+              }
             ></textarea>
 
             {/* Submit button */}
