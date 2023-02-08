@@ -6,11 +6,8 @@ function ModeChanger({
   user,
   setSelectedModel,
   selectedModel,
-  clearChat,
-  clearInput,
   isLoading,
-  setResponseFailed,
-  setIsRateLimited,
+  handleNewChat,
 }) {
   function handleClick() {
     if (selectedModel === "code-davinci-002") {
@@ -21,10 +18,7 @@ function ModeChanger({
       setSelectedModel("code-davinci-002");
     }
 
-    clearChat();
-    clearInput();
-    setIsRateLimited(false);
-    setResponseFailed(false);
+    handleNewChat();
   }
 
   return (

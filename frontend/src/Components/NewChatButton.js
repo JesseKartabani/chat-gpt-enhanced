@@ -1,25 +1,11 @@
 import "./NewChatButton.css";
 import React from "react";
 
-const NewChatButton = ({
-  clearChat,
-  clearInput,
-  handleNewChat,
-  isLoading,
-  setIsRateLimited,
-  setResponseFailed,
-}) => {
+const NewChatButton = ({ handleNewChat, isLoading }) => {
   function handleClick() {
-    // Clear old messages
-    clearChat();
-    // Clear users input
-    clearInput();
-    // Sets a new conversation id
+    // Sets a new conversation id, clears users input and messages,
+    // also removes error messages
     handleNewChat();
-    // Remove rate limit error message
-    setIsRateLimited(false);
-    // Remove response failed error message
-    setResponseFailed(false);
   }
 
   return (

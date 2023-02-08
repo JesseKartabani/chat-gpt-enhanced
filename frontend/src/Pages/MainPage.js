@@ -49,6 +49,10 @@ function MainPage({ app, db }) {
     if (user) {
       setConversationId(user.uid + Date.now());
     }
+    clearInput();
+    clearChat();
+    setIsRateLimited(false);
+    setResponseFailed(false);
   }
 
   // Redirect user to google login
@@ -278,14 +282,7 @@ function MainPage({ app, db }) {
     <div className="App">
       {/* Side menu (not visible on mobile) */}
       <aside className="side-menu">
-        <NewChatButton
-          clearChat={clearChat}
-          clearInput={clearInput}
-          handleNewChat={handleNewChat}
-          isLoading={isLoading}
-          setIsRateLimited={setIsRateLimited}
-          setResponseFailed={setResponseFailed}
-        />
+        <NewChatButton handleNewChat={handleNewChat} isLoading={isLoading} />
         {/* Display message history if user is logged in */}
         {user && (
           <MessageHistory
@@ -304,11 +301,8 @@ function MainPage({ app, db }) {
           user={user}
           setSelectedModel={setSelectedModel}
           selectedModel={selectedModel}
-          clearChat={clearChat}
-          clearInput={clearInput}
           isLoading={isLoading}
-          setIsRateLimited={setIsRateLimited}
-          setResponseFailed={setResponseFailed}
+          handleNewChat={handleNewChat}
         />
 
         {/* Displays users free trial status */}
@@ -331,14 +325,7 @@ function MainPage({ app, db }) {
       <section className="chat-box">
         {/* New chat button for mobile only */}
         <div className="mobile-new-chat-button">
-          <NewChatButton
-            clearChat={clearChat}
-            clearInput={clearInput}
-            isLoading={isLoading}
-            handleNewChat={handleNewChat}
-            setIsRateLimited={setIsRateLimited}
-            setResponseFailed={setResponseFailed}
-          />
+          <NewChatButton isLoading={isLoading} handleNewChat={handleNewChat} />
         </div>
 
         {/* Only display hero if theres no chats and if user isn't rate limited */}
