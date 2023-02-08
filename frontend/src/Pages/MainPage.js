@@ -318,11 +318,13 @@ function MainPage({ app, db }) {
         <StoreButton user={user} />
 
         {/* Login/logout buttons */}
-        <GoogleAuthButtons
-          user={user}
-          handleLogin={handleLogin}
-          handleLogout={handleLogout}
-        />
+        {!authLoading && (
+          <GoogleAuthButtons
+            user={user}
+            handleLogin={handleLogin}
+            handleLogout={handleLogout}
+          />
+        )}
       </aside>
 
       {/* Chat box */}
@@ -375,7 +377,7 @@ function MainPage({ app, db }) {
           Right now its set up to only display the login button need to rework
           the ui for mobile 
         */}
-        {!user && (
+        {!user && !authLoading && (
           <div className="mobile-login-button">
             <GoogleAuthButtons
               user={user}
