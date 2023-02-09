@@ -45,7 +45,7 @@ const ChatInputForm = ({
       // fades in
       initial={{ opacity: 0.5 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.1 }}
       className="chat-input-box"
     >
       {/* Only show chat input if user is signed in */}

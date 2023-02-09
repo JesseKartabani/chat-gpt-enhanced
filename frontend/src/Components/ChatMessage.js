@@ -54,7 +54,7 @@ const ChatMessage = ({ message, isLastMessage, selectedModel }) => {
       // fade messages in
       initial={{ opacity: 0.5 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.1 }}
       className={`chat-message ${message.user === "gpt" && "chatgpt"}`}
     >
       <div className="chat-message-center">

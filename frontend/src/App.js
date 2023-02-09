@@ -1,10 +1,12 @@
+import React, { Suspense } from "react";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getDatabase } from "firebase/database";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainPage from "./Pages/MainPage";
-import Error404Page from "./Pages/Error404Page";
-import StorePage from "./Pages/StorePage";
+import { CircularProgress } from "@mui/material";
+const Error404Page = React.lazy(() => import("./Pages/Error404Page"));
+const StorePage = React.lazy(() => import("./Pages/StorePage"));
 
 const firebaseConfig = {
   apiKey: "AIzaSyBGRLU71c5pzN5WNY5IZtjEuFIZsGdcEjY",
@@ -25,13 +27,29 @@ export const db = getDatabase(app);
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<MainPage app={app} db={db} />} />
+    <BrowserRouter>
+      <Suspense
+        fallback={
+          <CircularProgress
+            style={{
+              margin: 0,
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              color: "#b3befe",
+            }}
+          />
+        }
+      >
+        <Routes>
+          <Route path="/" element={<MainPage app={app} db={db} />} />
 
-      <Route path="/store" element={<StorePage app={app} />} />
+          <Route path="/store" element={<StorePage app={app} />} />
 
-      <Route path="*" element={<Error404Page />} />
-    </Routes>
+          <Route path="*" element={<Error404Page />} />
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
   );
 }
 
