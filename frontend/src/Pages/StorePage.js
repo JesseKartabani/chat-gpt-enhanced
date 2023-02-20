@@ -126,7 +126,7 @@ function StorePage({ app }) {
         </div>
 
         {/* If a user is not subscribed, show the checkout button */}
-        {subscription?.role !== "premium" && (
+        {subscription?.ended_at || subscription?.role !== "premium" ? (
           <>
             <button className="sub-button" onClick={() => loadCheckout()}>
               Choose Premium
@@ -142,10 +142,10 @@ function StorePage({ app }) {
               )}
             </button>
           </>
-        )}
+        ) : null}
 
         {/* If a user is subscribed, show the unsubscribe button */}
-        {subscription?.role === "premium" && (
+        {subscription?.role === "premium" && !subscription?.ended_at && (
           <a
             className="sub-button"
             href="https://billing.stripe.com/p/login/3cs2bKeB07PpgeI8ww"
