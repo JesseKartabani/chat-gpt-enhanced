@@ -274,6 +274,7 @@ function MainPage({ app, db }) {
         current_period_end: doc.data().current_period_end,
         current_period_start: doc.data().current_period_start,
         ended_at: doc.data().ended_at,
+        status: doc.data().status,
       });
     });
   };
@@ -379,7 +380,8 @@ function MainPage({ app, db }) {
         (subscription?.role === "premium" &&
           !subscription?.ended_at &&
           !isRateLimited &&
-          selectedModel === "text-davinci-003") ? (
+          selectedModel === "text-davinci-003" &&
+          subscription?.status !== "incomplete") ? (
           <TemperatureSlider setTemperature={setTemperature} user={user} />
         ) : null}
 
@@ -410,7 +412,8 @@ function MainPage({ app, db }) {
         {hasTrial ||
         (subscription?.role === "premium" &&
           !subscription?.ended_at &&
-          !isRateLimited) ? (
+          !isRateLimited &&
+          subscription?.status !== "incomplete") ? (
           <ChatInputForm
             input={input}
             setInput={setInput}

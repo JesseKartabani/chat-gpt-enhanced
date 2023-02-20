@@ -35,6 +35,7 @@ function StorePage({ app }) {
         current_period_end: doc.data().current_period_end,
         current_period_start: doc.data().current_period_start,
         ended_at: doc.data().ended_at,
+        status: doc.data().status,
       });
     });
   };
@@ -73,6 +74,8 @@ function StorePage({ app }) {
       }
     });
   };
+
+  console.log(subscription);
   return (
     <div className="store-container">
       <h1 className="store-heading">ChatGPT Enhanced</h1>
@@ -126,7 +129,9 @@ function StorePage({ app }) {
         </div>
 
         {/* If a user is not subscribed, show the checkout button */}
-        {subscription?.ended_at || subscription?.role !== "premium" ? (
+        {subscription?.ended_at ||
+        subscription?.role !== "premium" ||
+        subscription?.status === "incomplete" ? (
           <>
             <button className="sub-button" onClick={() => loadCheckout()}>
               Choose Premium
@@ -145,14 +150,16 @@ function StorePage({ app }) {
         ) : null}
 
         {/* If a user is subscribed, show the unsubscribe button */}
-        {subscription?.role === "premium" && !subscription?.ended_at && (
-          <a
-            className="sub-button"
-            href="https://billing.stripe.com/p/login/3cs2bKeB07PpgeI8ww"
-          >
-            Unsubscribe
-          </a>
-        )}
+        {!subscription?.ended_at ||
+          subscription?.status ===
+            "complete"(
+              <a
+                className="sub-button"
+                href="https://billing.stripe.com/p/login/3cs2bKeB07PpgeI8ww"
+              >
+                Unsubscribe
+              </a>
+            )}
       </motion.div>
 
       <Link className="home-button" to={"/"}>
