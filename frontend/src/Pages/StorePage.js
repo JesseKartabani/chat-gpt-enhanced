@@ -150,16 +150,15 @@ function StorePage({ app }) {
         ) : null}
 
         {/* If a user is subscribed, show the unsubscribe button */}
-        {!subscription?.ended_at ||
-          subscription?.status ===
-            "complete"(
-              <a
-                className="sub-button"
-                href="https://billing.stripe.com/p/login/3cs2bKeB07PpgeI8ww"
-              >
-                Unsubscribe
-              </a>
-            )}
+        {(!subscription?.ended_at && subscription?.status !== "incomplete") ||
+        subscription?.status === "complete" ? (
+          <a
+            className="sub-button"
+            href="https://billing.stripe.com/p/login/3cs2bKeB07PpgeI8ww"
+          >
+            Unsubscribe
+          </a>
+        ) : null}
       </motion.div>
 
       <Link className="home-button" to={"/"}>
