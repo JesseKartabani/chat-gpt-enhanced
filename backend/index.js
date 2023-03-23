@@ -51,7 +51,7 @@ app.post("/", async (req, res) => {
 
   // Create a completion using the OpenAI API
   const response = await openai.createCompletion({
-    // Can change this to any open ai model (text-davinci-003 is the most expensive)
+    // Can change this to any open ai model
     model: `${model}`,
     prompt: `${message}`,
     // Max size of the ai response, also includes the token size of the prompt

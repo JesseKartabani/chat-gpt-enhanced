@@ -43,7 +43,7 @@ function MainPage({ app, db }) {
   const [hasTrial, setHasTrial] = useState(false);
   const [isRateLimited, setIsRateLimited] = useState(false);
   const [responseFailed, setResponseFailed] = useState(false);
-  const [selectedModel, setSelectedModel] = useState("text-davinci-003");
+  const [selectedModel, setSelectedModel] = useState("gpt-3.5-turbo");
 
   function handleNewChat() {
     if (user) {
@@ -380,7 +380,7 @@ function MainPage({ app, db }) {
         (subscription?.role === "premium" &&
           !subscription?.ended_at &&
           !isRateLimited &&
-          selectedModel === "text-davinci-003" &&
+          selectedModel === "gpt-3.5-turbo" &&
           subscription?.status !== "incomplete") ? (
           <TemperatureSlider setTemperature={setTemperature} user={user} />
         ) : null}
