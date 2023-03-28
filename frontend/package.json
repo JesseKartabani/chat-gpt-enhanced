@@ -19,7 +19,7 @@
     "react-firebase-hooks": "^5.1.1",
     "react-overlays": "^5.2.1",
     "react-router-dom": "^6.6.2",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "react-simple-typewriter": "^5.0.1",
     "react-speech-recognition": "^3.10.0",
     "react-syntax-highlighter": "^15.5.0",
