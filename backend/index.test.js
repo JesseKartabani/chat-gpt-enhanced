@@ -6,7 +6,7 @@ describe("POST /", () => {
     const response = await request(app).post("/").send({
       message: "Hello, how are you?",
       temperature: 0.5,
-      model: "text-davinci-003",
+      model: "gpt-3.5-turbo",
     });
     expect(response.status).toBe(200);
     expect(response.body.message).toBeDefined();

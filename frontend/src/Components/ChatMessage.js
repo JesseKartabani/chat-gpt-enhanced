@@ -97,7 +97,7 @@ const ChatMessage = ({ message, isLastMessage, selectedModel }) => {
         {message.user === "gpt" && (
           <div className="message" data-testid="ai-message">
             {/* Typewriter text followed by cursor */}
-            {selectedModel === "text-davinci-003" && (
+            {selectedModel === "gpt-3.5-turbo" && (
               <>
                 {text.trimStart()}
                 <Cursor cursorColor="white" cursorStyle={cursorVisible} />

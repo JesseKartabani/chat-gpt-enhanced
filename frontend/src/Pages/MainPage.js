@@ -27,8 +27,6 @@ import FreeTrial from "../Components/FreeTrial";
 import ClearConversations from "../Components/ClearConversations";
 import RateLimitError from "../Components/RateLimitError";
 import ResponseFailedError from "../Components/ResponseFailedError";
-import ModeChanger from "../Components/ModeChanger";
-import CodingModeGuide from "../Components/CodingModeGuide";
 
 function MainPage({ app, db }) {
   const provider = new GoogleAuthProvider(app);
@@ -43,7 +41,7 @@ function MainPage({ app, db }) {
   const [hasTrial, setHasTrial] = useState(false);
   const [isRateLimited, setIsRateLimited] = useState(false);
   const [responseFailed, setResponseFailed] = useState(false);
-  const [selectedModel, setSelectedModel] = useState("text-davinci-003");
+  const [selectedModel, setSelectedModel] = useState("gpt-3.5-turbo");
 
   function handleNewChat() {
     if (user) {
@@ -298,14 +296,6 @@ function MainPage({ app, db }) {
           <BugReportModal user={user} db={db} />
         </div>
 
-        <ModeChanger
-          user={user}
-          setSelectedModel={setSelectedModel}
-          selectedModel={selectedModel}
-          isLoading={isLoading}
-          handleNewChat={handleNewChat}
-        />
-
         {/* Displays users free trial status */}
         {hasTrial && subscription?.role !== "premium" && user && <FreeTrial />}
 
@@ -380,7 +370,7 @@ function MainPage({ app, db }) {
         (subscription?.role === "premium" &&
           !subscription?.ended_at &&
           !isRateLimited &&
-          selectedModel === "text-davinci-003" &&
+          selectedModel === "gpt-3.5-turbo" &&
           subscription?.status !== "incomplete") ? (
           <TemperatureSlider setTemperature={setTemperature} user={user} />
         ) : null}
@@ -389,16 +379,6 @@ function MainPage({ app, db }) {
         {!user && !authLoading && (
           <SignUpHeading handleLogin={handleLogin} isLoggingIn={isLoggingIn} />
         )}
-
-        {/* If user is in code mode show coding mode guide */}
-        {hasTrial ||
-        (subscription?.role === "premium" &&
-          !subscription?.ended_at &&
-          !isRateLimited &&
-          user &&
-          chatLog.length === 0) ? (
-          <CodingModeGuide selectedModel={selectedModel} />
-        ) : null}
 
         {/* If the user isn't subscribed display the visit store heading */}
         {subscription?.role !== "premium" && user && !hasTrial && (

@@ -1,6 +1,6 @@
 # ChatGPT Enhanced
 
-Leverages OpenAI's API to tap into the GPT (text-davinci-003) and Codex (code-davinci-002) models, enabling the generation of natural language responses to user prompts. Additionally, it enhances ChatGPT's functionality by incorporating speech-to-text and giving users control over the AI's balance of logic and creativity. The user interface, developed with React, offers a simple and seamless interaction with the AI-powered service.
+Leverages OpenAI's API enabling the generation of natural language responses to user prompts. Additionally, it enhances ChatGPT's functionality by incorporating speech-to-text and giving users control over the AI's balance of logic and creativity. The user interface, developed with React, offers a simple and seamless interaction with the AI-powered service.
 
 ## [Live Website](https://chat-gpt-enhanced.web.app/)
 
